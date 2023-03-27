@@ -1,0 +1,534 @@
+
+.center {
+    margin: 0 auto;
+    text-align: center;
+}
+
+/* barcode container */
+.anim-box {
+    position: relative;
+    /* width: 100%; */
+    /* height: 300px; */
+    padding: 25px 30px;
+    transition: transform .6s ease-out;
+}
+
+/* adds the 4 corners */
+.anim-box:before,
+.anim-box:after,
+.anim-box>:first-child:before,
+.anim-box>:first-child:after {
+    position: absolute;
+    width: 10%;
+    height: 15%;
+    border-color: rgb(197, 61, 61);
+    border-style: solid;
+    content: ' ';
+}
+
+/* top left corner */
+.anim-box:before {
+    top: 0;
+    left: 0;
+    border-width: 2px 0 0 2px;
+}
+
+/* top right corner */
+.anim-box:after {
+    top: 0;
+    right: 0;
+    border-width: 2px 2px 0 0;
+}
+
+/* bottom right corner */
+.anim-box>:first-child:before {
+    bottom: 0;
+    right: 0;
+    border-width: 0 2px 2px 0;
+}
+
+/* bottom left corner */
+.anim-box>:first-child:after {
+    bottom: 0;
+    left: 0;
+    border-width: 0 0 2px 2px;
+}
+
+
+.anim-box:hover .scanner {
+    animation-play-state: running;
+
+}
+
+/* animated laser beam */
+.scanner {
+    width: 100%;
+    height: 3px;
+    background-color: red;
+    opacity: 0.7;
+    position: relative;
+    box-shadow: 0px 0px 8px 10px rgba(170, 11, 23, 0.49);
+    top: 50%;
+
+}
+
+.startScan {
+
+    animation-name: scan;
+    animation-duration: 4s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    z-index: 10;
+    /* animation-play-state: paused; */
+}
+
+@keyframes scan {
+    0% {
+        box-shadow: 0px 0px 8px 10px rgba(170, 11, 23, 0.49);
+        top: 50%;
+    }
+
+    25% {
+        box-shadow: 0px 6px 8px 10px rgba(170, 11, 23, 0.49);
+        top: 5px;
+    }
+
+    75% {
+        box-shadow: 0px -6px 8px 10px rgba(170, 11, 23, 0.49);
+        top: 98%;
+    }
+}
+
+#response {
+    border: 1px solid white;
+    box-shadow: 0 0 15px 7px #00f8d3a6;
+}
+
+
+.camera{
+    max-width: 40vw;
+    max-height: 40vw;
+}
+.mainbody{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    margin: 2px;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}
+
+
+/* loader */
+#sparkles > path {
+    -webkit-animation: sparklyBits 1000ms infinite;
+            animation: sparklyBits 1000ms infinite;
+    position: absolute;
+  }
+
+  #burrito{
+    margin: 5px;
+  }
+  
+  .message {
+    margin-top: 20px;
+    font-size: 15px;
+    text-align:center;
+    font-weight: bold;
+    color: rgb(151, 126, 126);
+    font-family: 'Courier New', Courier, monospace;
+    width: 200px;
+  }
+
+  
+  
+  #sparkles > path:nth-child(1) {
+    -webkit-animation-delay: 35ms;
+            animation-delay: 35ms;
+  }
+  
+  #sparkles > path:nth-child(2) {
+    -webkit-animation-delay: 70ms;
+            animation-delay: 70ms;
+  }
+  
+  #sparkles > path:nth-child(3) {
+    -webkit-animation-delay: 105ms;
+            animation-delay: 105ms;
+  }
+  
+  #sparkles > path:nth-child(4) {
+    -webkit-animation-delay: 140ms;
+            animation-delay: 140ms;
+  }
+  
+  #sparkles > path:nth-child(5) {
+    -webkit-animation-delay: 175ms;
+            animation-delay: 175ms;
+  }
+  
+  #sparkles > path:nth-child(6) {
+    -webkit-animation-delay: 210ms;
+            animation-delay: 210ms;
+  }
+  
+  #sparkles > path:nth-child(7) {
+    -webkit-animation-delay: 245ms;
+            animation-delay: 245ms;
+  }
+  
+  #sparkles > path:nth-child(8) {
+    -webkit-animation-delay: 280ms;
+            animation-delay: 280ms;
+  }
+  
+  #sparkles > path:nth-child(9) {
+    -webkit-animation-delay: 315ms;
+            animation-delay: 315ms;
+  }
+  
+  #sparkles > path:nth-child(10) {
+    -webkit-animation-delay: 350ms;
+            animation-delay: 350ms;
+  }
+  
+  #sparkles > path:nth-child(11) {
+    -webkit-animation-delay: 385ms;
+            animation-delay: 385ms;
+  }
+  
+  #sparkles > path:nth-child(12) {
+    -webkit-animation-delay: 420ms;
+            animation-delay: 420ms;
+  }
+  
+  #sparkles > path:nth-child(13) {
+    -webkit-animation-delay: 455ms;
+            animation-delay: 455ms;
+  }
+  
+  #sparkles > path:nth-child(14) {
+    -webkit-animation-delay: 490ms;
+            animation-delay: 490ms;
+  }
+  
+  #sparkles > path:nth-child(15) {
+    -webkit-animation-delay: 525ms;
+            animation-delay: 525ms;
+  }
+  
+  #sparkles > path:nth-child(16) {
+    -webkit-animation-delay: 560ms;
+            animation-delay: 560ms;
+  }
+  
+  #sparkles > path:nth-child(17) {
+    -webkit-animation-delay: 595ms;
+            animation-delay: 595ms;
+  }
+  
+  #sparkles > path:nth-child(18) {
+    -webkit-animation-delay: 630ms;
+            animation-delay: 630ms;
+  }
+  
+  #sparkles > path:nth-child(19) {
+    -webkit-animation-delay: 665ms;
+            animation-delay: 665ms;
+  }
+  
+  #sparkles > path:nth-child(20) {
+    -webkit-animation-delay: 700ms;
+            animation-delay: 700ms;
+  }
+  
+  #sparkles > path:nth-child(21) {
+    -webkit-animation-delay: 735ms;
+            animation-delay: 735ms;
+  }
+  
+  #sparkles > path:nth-child(22) {
+    -webkit-animation-delay: 770ms;
+            animation-delay: 770ms;
+  }
+  
+  #sparkles > path:nth-child(23) {
+    -webkit-animation-delay: 805ms;
+            animation-delay: 805ms;
+  }
+  
+  #sparkles > path:nth-child(24) {
+    -webkit-animation-delay: 840ms;
+            animation-delay: 840ms;
+  }
+  
+  #sparkles > path:nth-child(25) {
+    -webkit-animation-delay: 875ms;
+            animation-delay: 875ms;
+  }
+  
+  #sparkles > path:nth-child(26) {
+    -webkit-animation-delay: 910ms;
+            animation-delay: 910ms;
+  }
+  
+  #sparkles > path:nth-child(27) {
+    -webkit-animation-delay: 945ms;
+            animation-delay: 945ms;
+  }
+  
+  #sparkles > path:nth-child(28) {
+    -webkit-animation-delay: 980ms;
+            animation-delay: 980ms;
+  }
+  
+  #sparkles > path:nth-child(29) {
+    -webkit-animation-delay: 1015ms;
+            animation-delay: 1015ms;
+  }
+  
+  @-webkit-keyframes sparklyBits {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes sparklyBits {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  #sparkles path,#burrito path {
+    fill: rgb(155, 140, 140);
+    
+  }
+
+
+  /* alertinh */
+
+  /* button */
+  .btn-circle-download {
+    position: relative;
+    height: 60px;
+    width: 60px;
+    margin: auto;
+    border-radius: 100%;
+    background: #E8EAED;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.2s ease;
+  }
+  .btn-circle-download:after {
+    content: "";
+    position: relative;
+    display: block;
+    width: 200%;
+    height: 100%;
+    background-image: linear-gradient(100deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0));
+    transform: translateX(-100%);
+  }
+  .btn-circle-download svg {
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    fill: none;
+  }
+  .btn-circle-download svg#border {
+    position: absolute;
+    top: 0;
+    left: 0;
+    stroke: none;
+    stroke-dasharray: 144;
+    stroke-dashoffset: 144;
+    transition: all 0.5s linear;
+  }
+  .btn-circle-download svg#arrow {
+    position: absolute;
+    top: 14px;
+    left: 17px;
+    stroke: #9098A9;
+    transition: all 0.2s ease;
+  }
+  .btn-circle-download svg#check {
+    position: absolute;
+    top: 17px;
+    left: 13px;
+    stroke: white;
+    transform: scale(0);
+  }
+  .btn-circle-download:hover {
+    background: rgba(0, 119, 255, 0.2);
+  }
+  .btn-circle-download:hover #arrow path,
+  .btn-circle-download:hover #arrow polyline {
+    stroke: #0077FF;
+  }
+  .btn-circle-download.load {
+    background: rgba(0, 119, 255, 0.2);
+  }
+  .btn-circle-download.load #arrow path,
+  .btn-circle-download.load #arrow polyline {
+    stroke: #0077FF;
+  }
+  .btn-circle-download.load #border {
+    stroke: #0077FF;
+    stroke-dasharray: 144;
+    stroke-dashoffset: 0;
+  }
+  .btn-circle-download.done {
+    background: #0077FF;
+    animation: rubberBand 0.8s;
+  }
+  .btn-circle-download.done:after {
+    transform: translateX(50%);
+    transition: transform 0.4s ease;
+    transition-delay: 0.7s;
+  }
+  .btn-circle-download.done #border,
+  .btn-circle-download.done #arrow {
+    display: none;
+  }
+  .btn-circle-download.done #check {
+    transform: scale(1);
+    transition: all 0.2s ease;
+    transition-delay: 0.2s;
+  }
+  
+  @keyframes rubberBand {
+    from {
+      transform: scale(1, 1, 1);
+    }
+    30% {
+      transform: scale3d(1.15, 0.75, 1);
+    }
+    40% {
+      transform: scale3d(0.75, 1.15, 1);
+    }
+    50% {
+      transform: scale3d(1.1, 0.85, 1);
+    }
+    65% {
+      transform: scale3d(0.95, 1.05, 1);
+    }
+    75% {
+      transform: scale3d(1.05, 0.95, 1);
+    }
+    to {
+      transform: scale3d(1, 1, 1);
+    }
+  }
+  .credit {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    transition: all 0.2s ease;
+    -webkit-user-select: none;
+    user-select: none;
+    opacity: 0.6;
+  }
+  .credit img {
+    width: 72px;
+  }
+  .credit:hover {
+    transform: scale(0.95);
+  }
+
+  /* blog */
+
+.blog_post {
+    background: #fff;
+    max-width: 250px;
+    border-radius: 10px;
+    box-shadow: 1px 1px 2rem rgba(0, 0, 0, 0.3);
+    position: relative;
+    text-align: center;
+  }
+  
+  
+  .container_copy {
+    padding: 2px;
+    /* padding: 6rem 4rem 5rem 4rem; */
+  }
+  
+  .img_pod {
+    height: 60px;
+    width: 60px;
+    background: rgb(66, 52, 52);
+    z-index: 10;
+    box-shadow: 1px 1px 2rem rgba(0, 0, 0, 0.3);
+    border-radius: 100%;
+    position: absolute;
+    left: -10%;
+    top: -13%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+.date{
+    font-weight: bold;
+    color: #999;
+}
+
+
+/* typing */
+
+.typing {
+  position: relative;
+}
+.typing::after {
+  content: "|";
+  position: absolute;
+  right: 0;
+  width: 100%;
+  color: rgb(255, 0, 0);
+  background: #ffffff;
+  -webkit-animation: typing 1s steps(16) forwards, caret 1s infinite;
+          animation: typing 1s steps(16) forwards, caret 1s infinite;
+}
+
+@-webkit-keyframes typing {
+  to {
+    width: 0;
+  }
+}
+
+@keyframes typing {
+  to {
+    width: 0;
+  }
+}
+@-webkit-keyframes caret {
+  50% {
+    color: transparent;
+  }
+}
+@keyframes caret {
+  50% {
+    color: transparent;
+  }
+}
+
+.alerting{
+    width: 350px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    display: none;
+}
+
+.showAlert{
+  display: block;
+  z-index: 10;
+}
+
