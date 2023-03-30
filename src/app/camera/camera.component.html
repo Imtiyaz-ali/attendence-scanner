@@ -64,6 +64,7 @@
         <div id="done" class="done"></div>
 
         <div class="camera">
+          
             <ngx-scanner-qrcode #action="scanner" (event)="scanSuccessHandler($event)"></ngx-scanner-qrcode>
             <!-- <button (click)="action.isStart ? action.stop() : action.start()">{{action.isStart ? 'Stop' : 'Start'}}</button> -->
             

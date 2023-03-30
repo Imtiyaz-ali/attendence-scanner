@@ -8,9 +8,21 @@ import { NgxScannerQrcodeComponent } from 'ngx-scanner-qrcode';
 })
 export class CameraComponent  {
   @ViewChild('action') scanner?: NgxScannerQrcodeComponent;
-
+  config = {
+    enable: true,
+    showFlipCameraButton: true,
+    showTorchButton: true,
+    torchOn: false,
+    enableCache: true,
+    facingMode: 'environment', // this line specifies the back camera on mobile devices
+    constraints: {
+      video: {
+        facingMode: 'environment' // this line specifies the back camera on desktop browsers
+      }
+    }
+  };
   message = "Camera Is Loading"
-  loading = true
+  loading = false
   qrscanned = false
   user_name= ""
   roll = 0
@@ -28,6 +40,11 @@ export class CameraComponent  {
       roll: 30,
       stream:"CS"
     },
+    '8842CS20':{
+      name:'Govind P',
+      roll: 26,
+      stream:'CS'
+    }
   };
 
   checkUser(key:any){

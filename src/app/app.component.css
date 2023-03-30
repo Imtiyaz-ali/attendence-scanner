@@ -196,11 +196,9 @@
 
 
 /* mobile nav */
+
 @import url("//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.min.css");
-.mobileNav{
-  display: block;
-  
-}
+
 .menu{
     position: fixed;
     bottom: 0;
@@ -304,9 +302,122 @@
         height:3.5em;
     }
 }
-@media screen and (min-width: 1024px) {
+.mobileNav{
+  display: none;
+}
+@media screen and (min-width: 512px) and (max-width:1024px) {
 
   .mobileNav{
-    display: none;
+    display: block;
   }
+}
+
+
+
+/* mobile nav */
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,400i,700");
+
+.fab {
+  display: none;
+  z-index: 100;
+  cursor: pointer;
+  color: #ffffff;
+  position: fixed;
+  bottom: 1rem;
+  /* right: 1rem; */
+}
+@media screen and (max-width: 512px) {
+  .fab{
+    display: block;
+  }
+}
+.fab > .fab-trigger {
+  position: relative;
+  left:8px;
+  z-index: 101;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #10c15c;
+  height: 50px;
+  width: 50px;
+  transform: translate(0);
+  box-shadow: 0 2px 4px 2px rgba(0, 0, 0, 0.25);
+}
+.fab > .fab-trigger > .fab-icon {
+  transition: all 0.3s;
+  transform: rotate(45deg);
+  height: 32px;
+  width: 32px;
+}
+.fab > .fab-items {
+  user-select: none;
+  z-index: 101;
+  position: absolute;
+  bottom: 0px;
+  right: 5px;
+  display: flex;
+  flex-direction: column-reverse;
+  transform: translatey(calc(64px + 32px + 100%));
+  opacity: 0;
+  transition-property: transform, opacity;
+  transition-duration: 0.3s, 0.3s;
+  transition-timing-function: ease-out;
+}
+.fab > .fab-items > .fab-item {
+  font-weight: bold;
+  color: #f8f8f8;
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  white-space: nowrap;
+  height: 50px;
+}
+.fab > .fab-items > .fab-item > .icon {
+  margin-right: 0.75rem;
+}
+.fab > .fab-items > .fab-item > .icon > svg {
+  width: 32px;
+  height: 24px;
+  fill: currentcolor;
+}
+.fab > .fab-items > .fab-item > .title {
+  font-size: 25px;
+  line-height: 25px;
+}
+.fab.open > .fab-trigger {
+  background-color: #ffffff;
+  color: #10c15c;
+}
+.fab.open > .fab-trigger > .fab-icon {
+  transform: rotate(0);
+}
+.fab.open > .fab-items {
+  opacity: 1;
+  transform: translatey(0);
+}
+.fab > .fab-backdrop {
+  z-index: 1;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  height: 90px;
+  width: 90px;
+  background: #10c15c;
+  opacity: 0;
+  border-top-left-radius: 9999px;
+  transform: scale(0);
+  transform-origin: bottom right;
+  transition: all 0.3s ease-out;
+  box-shadow: 0 0 0 32px #10c15c88, 0 0 0 64px #10c15c33;
+}
+.fab.open > .fab-backdrop {
+  opacity: 0.75;
+  transform: scale(1);
+}
+.fab * {
+  user-select: none;
 }
