@@ -1,0 +1,86 @@
+.mainBody{
+    height: 100vh;
+    overflow: auto;
+}
+.card{
+    border:none;
+    position:relative;
+    overflow:hidden;
+    border-radius:8px;
+    cursor:pointer;
+    color: var(--app-content-main-color);
+    background: unset;
+
+}
+
+
+
+.card:hover::after{
+    transform:scaleY(1);
+}
+
+
+.fonts{
+    font-size:11px;
+}
+
+.social-list{
+    display:flex;
+    list-style:none;
+    justify-content:center;
+    padding:0;
+}
+
+.social-list li{
+    padding:10px;
+    color:#8E24AA;
+    font-size:19px;
+}
+
+
+.buttons button:nth-child(1){
+       border:1px solid #8E24AA !important;
+       color:#8E24AA;
+       height:40px;
+}
+
+.buttons button:nth-child(1):hover{
+       border:1px solid #8E24AA !important;
+       color:#fff;
+       height:40px;
+       background-color:#8E24AA;
+}
+
+.buttons button:nth-child(2){
+       border:1px solid #8E24AA !important;
+       background-color:#8E24AA;
+       color:#fff;
+        height:40px;
+}
+
+/* attendence */
+
+.hero {
+    width: 100%;
+    height: 100%;
+    /* background: linear-gradient(45deg, #83B8D7, #BAA6FD); */
+    display: grid;
+  }
+  
+  #calendar {
+    width: 90%;
+    margin: 40px auto;
+  }
+
+.calendar-events{
+    background-color: red;
+}
+@media screen and (max-width: 991px){
+    .sidebar-hide .calendar-inner{
+
+        background-color: red;
+    }
+}
+
+
+/* mytheme */

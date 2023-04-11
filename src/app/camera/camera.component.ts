@@ -22,7 +22,7 @@ export class CameraComponent  {
     }
   };
   message = "Camera Is Loading"
-  loading = false
+  loading = true
   qrscanned = false
   user_name= ""
   roll = 0

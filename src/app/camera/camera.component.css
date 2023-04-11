@@ -536,9 +536,12 @@
 
 /* min screen */
 @media screen and (max-width: 512px) {
+  .mainbody{
+    display: block;
+  }
   .camera{
     max-width: 75vw;
-    max-height: 90vh;
+    max-height: 80vh;
     /* margin-top: 1vh; */
   }
   .alerting{

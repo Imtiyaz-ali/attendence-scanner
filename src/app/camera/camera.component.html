@@ -65,10 +65,10 @@
 
         <div class="camera">
           
-            <ngx-scanner-qrcode #action="scanner" (event)="scanSuccessHandler($event)"></ngx-scanner-qrcode>
-            <!-- <button (click)="action.isStart ? action.stop() : action.start()">{{action.isStart ? 'Stop' : 'Start'}}</button> -->
+            <!-- <ngx-scanner-qrcode #action="scanner" (event)="scanSuccessHandler($event)"></ngx-scanner-qrcode> -->
+           
             
-            <!-- <img (click)="scanSuccessHandler('9155CS20')" width="350px" height="350px" src="./images/background.jpeg" alt=""> -->
+            <img (click)="scanSuccessHandler('9155CS20')" width="350px" height="350px" src="./images/background.jpeg" alt="">
             
         </div>
     </div>

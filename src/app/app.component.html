@@ -21,7 +21,7 @@
         </a>
       </li>
       <li class="sidebar-list-item" routerLinkActive="active">
-        <a routerLink="/contact">
+        <a routerLink="/teacher">
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
             class="feather feather-shopping-bag">
@@ -43,8 +43,8 @@
           <span>Admin</span>
         </a>
       </li>
-      <li class="sidebar-list-item">
-        <a href="#">
+      <li class="sidebar-list-item" routerLinkActive="active">
+        <a routerLink="/contact">
           <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
             class="feather feather-inbox">
@@ -121,9 +121,9 @@
 
       <button (click)="connectWallet()" class="app-content-headerButton">Connect To Wallet</button>
     </div>
- 
+    
+      <router-outlet></router-outlet>
 
-    <router-outlet></router-outlet>
   </div>
 </div>
 
