@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
+
 import { AttendanceService } from './data.service';
 declare var $: any;
 @Component({
@@ -11,7 +12,7 @@ export class TeacherComponent implements OnInit {
 
 
   attendanceData!: any[];
-  constructor(private attendanceService: AttendanceService) { }
+  constructor(private el: ElementRef, private renderer: Renderer2,private attendanceService: AttendanceService) { }
   loadingData: any;
 
   async loadData(): Promise<void> {
@@ -32,22 +33,12 @@ export class TeacherComponent implements OnInit {
 
   getCalender(){
 
-    $('#calendar').evoCalendar({
-      theme: 'Midnight Blue',
-      // eventListNoEventsText: "No Class Taken On This Day." 
-    })
-
-
     // attendence
 
     // Using forEach method
     if (this.attendanceData) {
       this.attendanceData.forEach((attendance) => {
-
-
-
-
-        if (attendance.hasClass == true) {
+        if (attendance.class == true) {
           const total = 56
           const present = attendance.absent - total
 
@@ -55,23 +46,25 @@ export class TeacherComponent implements OnInit {
             {
               id: attendance.date,
               name: `Attendence(${attendance.date})`,
-              date: `${attendance.date}/2023`, // Repeat every 7 days
+              date: `${attendance.date}/2023`, 
               type: "event",
               // everyYear: true,
               color: "green",
               description: `Total-Absents: ${attendance.absent}`
             },
             {
+              id:`Absent ${attendance.date}`,
               name: "Absentees Roll-No",
-              date: `${attendance.date}/2023`, // Repeat every 7 days
+              date: `${attendance.date}/2023`, 
               type: "event",
               // everyYear: true,
               color: "red",
               description: `${attendance.rollNo}`
             },
             {
+              id:`Leave ${attendance.leave}`,
               name: "On-Leave Roll-No",
-              date: `${attendance.date}/2023`, // Repeat every 7 days
+              date: `${attendance.date}/2023`, 
               type: "event",
               // everyYear: true,
               color: "blue",
@@ -85,9 +78,9 @@ export class TeacherComponent implements OnInit {
               id: attendance.date,
               name: `No Class`,
               date: `${attendance.date}/2023`, // Repeat every 7 days
-              type: "event",
+              type: "holiday",
               // everyYear: true,
-              color: "pink",
+              // color: "pink",
               description: `No Class Has Taken On This Day`
             },
 
@@ -103,15 +96,20 @@ export class TeacherComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadData()
+    $('#calendar').evoCalendar({
+      theme: 'Midnight Blue',
+      // eventListNoEventsText: "No Class Taken On This Day." 
+    })
+    $('#calendar').evoCalendar('toggleSidebar', false);
     this.getCalender()
-
+    
     setTimeout(() => {
 
       $("#calendar").evoCalendar("addCalendarEvent", [
         {
           id: "123",
           name: "dxfg",
-          date: `04/04`, // Repeat every 7 days
+          date: `04/04/2023`, // Repeat every 7 days
           type: "event",
           // everyYear: true,
           color: "green",
@@ -121,4 +119,19 @@ export class TeacherComponent implements OnInit {
     }, 3000);
     
   }
+
+  addEvent() {
+    const event = {
+      id: '345345',
+      name: '345',
+      date: '04/04/2023',
+      type: 'event',
+      color: 'green',
+      description: 'Total-Absents:'
+    };
+    const calendarEl = this.el.nativeElement.querySelector('#calendar');
+    const calendar = $(calendarEl);
+    calendar.evoCalendar('addCalendarEvent', [event]);
+  }
+  
 }

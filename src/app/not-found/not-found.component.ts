@@ -6,12 +6,13 @@ declare var $: any;
   templateUrl: './not-found.component.html',
   styleUrls: ['./not-found.component.css']
 })
-export class NotFoundComponent implements OnInit{
+export class NotFoundComponent implements OnInit {
 
-  ngOnInit(): void {
-    $('#app').evoCalendar({
-    theme: 'Midnight Blue'
-})
+  ngOnInit(): void { }
+
+  showMobileNav = false
+  mobileNav() {
     
+
   }
 }

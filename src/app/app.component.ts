@@ -8,6 +8,7 @@ import Web3 from 'web3';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  [x: string]: any;
   switchMode() {
     var modeSwitch = document.querySelector('.mode-switch');
     document.documentElement.classList.toggle('light');
@@ -34,13 +35,18 @@ export class AppComponent {
   }
 
   // mobile nav
+  showMobileNav = false
   mobileNav(){
-    document.querySelectorAll(".fab").forEach((fab) =>
-	fab.addEventListener("click", (ev) => {
-		ev.stopPropagation();
-		fab.classList.toggle("open");
-	})
-);
+    this.showMobileNav = !this.showMobileNav
+    const button: any = document.querySelector('.menu__button');
+    const menu: any = document.querySelector('.menu__body');
+    if (this.showMobileNav) {
+    
+      menu.removeAttribute('hidden');
+      
+    } else {
+      menu.setAttribute('hidden', '');
+    }
   }
 
 }
