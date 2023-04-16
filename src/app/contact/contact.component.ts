@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+
+import { Component, ViewChild, ElementRef } from '@angular/core';
+
+
 
 @Component({
   selector: 'app-contact',
@@ -6,17 +9,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./contact.component.css']
 })
 export class ContactComponent {
+  
 
-  clicked(){
-    var  butt = document.getElementById("buttonAnim")
-    butt?.classList.add("load")
 
-    setTimeout(() => {
-    butt?.classList.add("done")
-      
-    }, 1000);
 
-    
-  }
 
 }

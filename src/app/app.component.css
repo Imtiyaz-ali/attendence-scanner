@@ -314,8 +314,14 @@
 
 
 
+.menu__button{
+  display: none;
+}
 @media screen and (max-width: 512px) {
   .fab{
+    display: block;
+  }
+  .menu__button{
     display: block;
   }
 }

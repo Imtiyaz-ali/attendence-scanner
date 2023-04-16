@@ -8,6 +8,7 @@ import { NgxScannerQrcodeComponent } from 'ngx-scanner-qrcode';
 })
 export class CameraComponent  {
   @ViewChild('action') scanner?: NgxScannerQrcodeComponent;
+ 
   config = {
     enable: true,
     showFlipCameraButton: true,
@@ -68,10 +69,11 @@ export class CameraComponent  {
   ngAfterViewInit() {
     setTimeout(() => {   
       this.loading = false;
-    }, 3000);
-    setTimeout(() => {
       this.scanning()
-      
+    }, 3000);
+    setTimeout(() => {   
+
+      this.scanning()
     }, 4000);
   }
 
@@ -85,9 +87,9 @@ export class CameraComponent  {
   }
 
   scanning(){
-    setTimeout(() => {
-      this.loading= false
-    }, 2000);
+    // setTimeout(() => {
+    //   this.loading= false
+    // }, 2000);
     try {
       if (this.scanner && !this.scanner.isStart) {
         this.scanner.start();

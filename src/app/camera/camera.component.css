@@ -539,9 +539,19 @@
   .mainbody{
     display: block;
   }
+  .loading{
+    height: 100%;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
   .camera{
-    max-width: 75vw;
-    max-height: 80vh;
+    max-width: 80vw;
+    max-height: 90vh;
     /* margin-top: 1vh; */
   }
   .alerting{
