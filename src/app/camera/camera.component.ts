@@ -144,7 +144,7 @@ export class CameraComponent implements OnInit {
   scanSuccessHandler(result: any) {
 
     // extract useful data from qrcode
-    // const userData = result[0]["value"] as string;
+    const userData = result[0]["value"] as string;
 
     // if qrcode shown during face recogination
     if (this.faceRecoginising) {
@@ -153,13 +153,13 @@ export class CameraComponent implements OnInit {
       return
     }
 
-    const temp = '9155CS2';
+    // const temp = '9155CS2';
 
     // pause the camera
     this.scanner?.pause();
 
     // chesck in databse for user
-    const user_found = this.checkUser(temp);
+    const user_found = this.checkUser(userData);
 
     // popup data stored when data found/notfound trigger css
     const alerting = document.getElementById("alerting");
