@@ -56,13 +56,19 @@ export class CameraComponent implements OnInit {
       user_name: 'Kashinath S',
       roll: 30,
       stream: "CS",
-      img: ''
+      img: 'assets/kashi.jpg'
     },
     '8842CS20': {
       user_name: 'Govind P',
       roll: 26,
       stream: 'CS',
-      img: ''
+      img: 'assets/govind.jpg'
+    },
+    '9094CS20': {
+      user_name: 'AlanSavio',
+      roll: 7,
+      stream: 'CS',
+      img: 'assets/savio.jpg'
     }
   };
 

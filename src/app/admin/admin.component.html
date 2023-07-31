@@ -3,135 +3,207 @@
 
 <div class="mainbody">
     <div style="width: 100%;" class="p-4">
-        <div  class="welcome">
-          <div class="content rounded-3 p-3">
-            <h1 class="fs-3">Welcome to Admin Dashboard</h1>
-            <p class="mb-0">Here You Can Add And Manipulate Data Of Student/Teachers.</p>
-          </div>
+        <div class="welcome">
+            <div class="content rounded-3 p-3">
+                <h1 class="fs-3">Welcome to Admin Dashboard</h1>
+                <p class="mb-0">Here You Can Add And Manipulate Data Of Student/Teachers.</p>
+            </div>
         </div>
-    
+
         <section class="statistics mt-4">
-          <div class="row">
-            <div class="col-lg-4">
-              <div class="box d-flex rounded-2 align-items-center mb-4 mb-lg-0 p-3">
-                <i class="uil-envelope-shield fs-2 text-center bg-primary rounded-circle"></i>
-                <div class="ms-3">
-                  <div class="d-flex align-items-center">
-                    <h3 class="mb-0">10</h3> <span class="d-block ms-2">Total Data</span>
-                  </div>
-                  <p class="fs-normal mb-0">...................</p>
+            <div class="row">
+                <div class="col-lg-4">
+                    <div class="box d-flex rounded-2 align-items-center mb-4 mb-lg-0 p-3">
+                        <i class="uil-envelope-shield fs-2 text-center bg-primary rounded-circle"></i>
+                        <div class="ms-3">
+                            <div class="d-flex align-items-center">
+                                <h3 class="mb-0">10</h3> <span class="d-block ms-2">Total Data</span>
+                            </div>
+                            <p class="fs-normal mb-0">...................</p>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-            <div class="col-lg-4">
-              <div class="box d-flex rounded-2 align-items-center mb-4 mb-lg-0 p-3">
-                <i class="uil-file fs-2 text-center bg-danger rounded-circle"></i>
-                <div class="ms-3">
-                  <div class="d-flex align-items-center">
-                    <h3 class="mb-0">5</h3> <span class="d-block ms-2">Teachers</span>
-                  </div>
-                  <p class="fs-normal mb-0">..............</p>
+                <div class="col-lg-4">
+                    <div class="box d-flex rounded-2 align-items-center mb-4 mb-lg-0 p-3">
+                        <i class="uil-file fs-2 text-center bg-danger rounded-circle"></i>
+                        <div class="ms-3">
+                            <div class="d-flex align-items-center">
+                                <h3 class="mb-0">5</h3> <span class="d-block ms-2">Teachers</span>
+                            </div>
+                            <p class="fs-normal mb-0">..............</p>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-            <div class="col-lg-4">
-              <div class="box d-flex rounded-2 align-items-center p-3">
-                <i class="uil-users-alt fs-2 text-center bg-success rounded-circle"></i>
-                <div class="ms-3">
-                  <div class="d-flex align-items-center">
-                    <h3 class="mb-0">6</h3> <span class="d-block ms-2">Students</span>
-                  </div>
-                  <p class="fs-normal mb-0">.......................</p>
+                <div class="col-lg-4">
+                    <div class="box d-flex rounded-2 align-items-center p-3">
+                        <i class="uil-users-alt fs-2 text-center bg-success rounded-circle"></i>
+                        <div class="ms-3">
+                            <div class="d-flex align-items-center">
+                                <h3 class="mb-0">6</h3> <span class="d-block ms-2">Students</span>
+                            </div>
+                            <p class="fs-normal mb-0">.......................</p>
+                        </div>
+                    </div>
                 </div>
-              </div>
             </div>
-          </div>
         </section>
-<!-- tabbar -->
+        <!-- tabbar -->
         <div class="p-4">
             <link href="https://fonts.googleapis.com/css?family=Work+Sans:400,600,700&display=swap" rel="stylesheet">
 
             <div class="layout">
-              <input name="nav" type="radio" class="nav home-radio" id="home" checked="checked" />
-              <div class="page home-page">
-                
-                <!-- table -->
-                <div class="container mt-5 px-2">
-    
-                    <div class="mb-2 d-flex justify-content-between align-items-center">
-                        
-                        <div class="position-relative">
-                            <span class="position-absolute search"><i class="fa fa-search"></i></span>
-                            <input class="form-control w-100" placeholder="Search by order#, name...">
-                        </div>
-                        
-                        <div class="px-2">
-                            
-                            <span>Filters <i class="fa fa-angle-down"></i></span>
-                            <i class="fa fa-ellipsis-h ms-3"></i>
-                        </div>
-                        
-                    </div>
-                    <div class="table-responsive">
-                    <table class="table table-responsive table-borderless">
-                        
-                      <thead>
-                        <tr class="bg-light">
-                          <th scope="col" width="5%">Edit</th>
-                          <th scope="col" width="5%">ID</th>
-                          
-                          <th scope="col" width="40%">Teacher</th>
-                          <th scope="col" width="30%">Subject</th>
-                          <th scope="col" class="text-end" width="20%"><span>Class-Taken</span></th>
-                        </tr>
-                      </thead>
-                  <tbody>
-                    <tr *ngFor="let user of users | keyvalue">
-                  
-                      <th scope="row"><li class="list-inline-item">
-                        <button class="btn btn-success btn-sm rounded-0" type="button" data-toggle="tooltip" data-placement="top" title="Edit"><i class="fa fa-edit"></i></button>
-                    </li></th>
-                      <td>{{user.value.roll}}</td>
-             
-                      <td><img *ngIf="user.value.img" [src]="user.value.img">{{ user.value.user_name }}</td>
-                      <td>Wirecard for figma</td>
-                      <td class="text-end"><span class="fw-bolder">$0.99</span> <i class="fa fa-ellipsis-h  ms-2"></i></td>
-                    </tr>
-    
-                  </tbody>
-                </table>
-                  
-                  </div>
-                    
-                </div>
+                <input name="nav" type="radio" class="nav home-radio" id="home" checked="checked" />
+                <div class="page home-page">
 
-              </div>
-              <label class="nav" for="home">
-                <span>
-                  <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-                  Teacher
-                </span>
-              </label>
-            
-            
-            
-              <input name="nav" type="radio" class="contact-radio" id="contact" />
-              <div class="page contact-page">
-                <div class="page-contents">
-                  <h1>Student</h1>
-                  <p>Eaque accusamus magnam error unde nam, atque provident omnis fugiat quam necessitatibus vel nulla sed quibusdam fuga veritatis assumenda alias quidem asperiores?</p>
-                  <p><a href="#">Get in touch</a></p>
+                    <!-- table -->
+                    <div class="container mt-5 px-2">
+
+                        <div class="mb-2 d-flex justify-content-between align-items-center">
+
+                            <div class="position-relative">
+                                <span class="position-absolute search"><i class="fa fa-search"></i></span>
+                                <input class="form-control w-100" placeholder="Search by order#, name...">
+                            </div>
+
+                            <div class="px-2">
+
+                                <span>Filters <i class="fa fa-angle-down"></i></span>
+                                <i class="fa fa-ellipsis-h ms-3"></i>
+                            </div>
+
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-responsive table-borderless">
+
+                                <thead>
+                                    <tr class="bg-light">
+                                        <th scope="col" width="5%">Edit</th>
+                                        <th scope="col" width="10%">ID</th>
+
+                                        <th scope="col" width="40%">Teacher</th>
+                                        <th scope="col" width="25%">Subject</th>
+                                        <th scope="col" class="text-end" width="20%"><span>Class-Taken</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let user of teachers | keyvalue">
+
+                                        <th scope="row">
+                                            <li class="list-inline-item">
+                                                <button class="btn btn-success btn-sm rounded-0" type="button"
+                                                    data-toggle="tooltip" data-placement="top" title="Edit"><i
+                                                        class="fa fa-edit"></i></button>
+                                            </li>
+                                        </th>
+                                        <td>{{user}}</td>
+
+                                        <td><img class="user_image" *ngIf="user.value.img" [src]="user.value.img"> | {{
+                                            user.value.user_name }}</td>
+                                        <td>{{
+                                            user.value.subject }}</td>
+                                        <td class="text-end"><span class="fw-bolder">{{
+                                            user.value.class }}</span> <i
+                                                class="fa fa-ellipsis-h  ms-2"></i></td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                    </div>
+
                 </div>
-              </div>
-              <label class="nav" for="contact">
-                <span>
-                <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
-                Student
-                  </span>
-                
-              </label>
+                <label class="nav" for="home">
+                    <span>
+                        <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2"
+                            fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                        </svg>
+                        Teacher
+                    </span>
+                </label>
+
+
+
+                <input name="nav" type="radio" class="contact-radio" id="contact" />
+                <div class="page contact-page">
+
+                    <!-- table -->
+                    <div class="container mt-5 px-2">
+
+                        <div class="mb-2 d-flex justify-content-between align-items-center">
+
+                            <div class="position-relative">
+                                <span class="position-absolute search"><i class="fa fa-search"></i></span>
+                                <input class="form-control w-100" placeholder="Search by order#, name...">
+                            </div>
+
+                            <div class="px-2">
+
+                                <span>Filters <i class="fa fa-angle-down"></i></span>
+                                <i class="fa fa-ellipsis-h ms-3"></i>
+                            </div>
+
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-responsive table-borderless">
+
+                                <thead>
+                                    <tr class="bg-light">
+                                        <th scope="col" width="5%">Edit</th>
+                                        <th scope="col" width="10%">ID</th>
+
+                                        <th scope="col" width="40%">Teacher</th>
+                                        <th scope="col" width="25%">Subject</th>
+                                        <th scope="col" class="text-end" width="20%"><span>Class-Taken</span></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr *ngFor="let user of users | keyvalue">
+
+                                        <th scope="row">
+                                            <li class="list-inline-item">
+                                                <button class="btn btn-success btn-sm rounded-0" type="button"
+                                                    data-toggle="tooltip" data-placement="top" title="Edit"><i
+                                                        class="fa fa-edit"></i></button>
+                                            </li>
+                                        </th>
+                                        <td>{{user.value.roll}}</td>
+
+                                        <td><img class="user_image" *ngIf="user.value.img" [src]="user.value.img"> | {{
+                                            user.value.user_name }}</td>
+                                        <td>Wirecard for figma</td>
+                                        <td class="text-end"><span class="fw-bolder">$0.99</span> <i
+                                                class="fa fa-ellipsis-h  ms-2"></i></td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+
+                        </div>
+
+                    </div>
+
+                </div>
+                <label class="nav" for="contact">
+                    <span>
+                        <svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2"
+                            fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1">
+                            <path
+                                d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z">
+                            </path>
+                        </svg>
+                        Student
+                    </span>
+
+                </label>
             </div>
-            
+
         </div>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor magnam illo incidunt suscipit inventore. Officia dolore nulla nobis qui. Voluptas beatae nostrum ipsam, quidem corrupti incidunt nesciunt! Sit suscipit harum tempora, enim, sapiente odio dolores, incidunt iure ipsa magni eum. Aspernatur tempore, molestiae id quos eos error possimus. At, commodi.</p>
-</div>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor magnam illo incidunt suscipit inventore.
+            Officia dolore nulla nobis qui. Voluptas beatae nostrum ipsam, quidem corrupti incidunt nesciunt! Sit
+            suscipit harum tempora, enim, sapiente odio dolores, incidunt iure ipsa magni eum. Aspernatur tempore,
+            molestiae id quos eos error possimus. At, commodi.</p>
+    </div>

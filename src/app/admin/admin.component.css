@@ -250,3 +250,11 @@ td{
 tr{
     align-items: center;
 }
+
+.user_image{
+    border-radius: 100%;
+    object-fit: cover;
+    width: 45px;
+    border: 1px solid indianred;
+    height: 45px;
+}
