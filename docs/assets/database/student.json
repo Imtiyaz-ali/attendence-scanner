@@ -1,0 +1,63 @@
+{
+    "122332": {
+      "name": "John Doe",
+      "id": 1,
+      "roll": 34,
+      "image": "sadf"
+    },
+    "987654": {
+      "name": "Alice Smith",
+      "id": 2,
+      "roll": 27,
+      "image": "dfgs"
+    },
+    "456789": {
+      "name": "Bob Johnson",
+      "id": 3,
+      "roll": 15,
+      "image": "gref"
+    },
+    "789012": {
+      "name": "Jane Doe",
+      "id": 4,
+      "roll": 42,
+      "image": "qwem"
+    },
+    "345678": {
+      "name": "Mike Johnson",
+      "id": 5,
+      "roll": 19,
+      "image": "wert"
+    },
+    "876543": {
+      "name": "Emily Smith",
+      "id": 6,
+      "roll": 8,
+      "image": "aety"
+    },
+    "567890": {
+      "name": "David Doe",
+      "id": 7,
+      "roll": 51,
+      "image": "jkol"
+    },
+    "234567": {
+      "name": "Ella Johnson",
+      "id": 8,
+      "roll": 12,
+      "image": "plmn"
+    },
+    "242344": {
+      "name": "William Smith",
+      "id": 9,
+      "roll": 23,
+      "image": "awer"
+    },
+    "901234": {
+      "name": "Sophia Johnson",
+      "id": 10,
+      "roll": 30,
+      "image": "qwek"
+    }
+  }
+  
