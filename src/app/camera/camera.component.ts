@@ -153,7 +153,7 @@ export class CameraComponent implements OnInit {
       return
     }
 
-    // const temp = '9155CS2';
+    const temp = '9094CS20';
 
     // pause the camera
     this.scanner?.pause();

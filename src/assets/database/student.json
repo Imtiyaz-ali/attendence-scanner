@@ -1,63 +1,26 @@
 {
-    "122332": {
-      "name": "John Doe",
-      "id": 1,
-      "roll": 34,
-      "image": "sadf"
-    },
-    "987654": {
-      "name": "Alice Smith",
-      "id": 2,
-      "roll": 27,
-      "image": "dfgs"
-    },
-    "456789": {
-      "name": "Bob Johnson",
-      "id": 3,
-      "roll": 15,
-      "image": "gref"
-    },
-    "789012": {
-      "name": "Jane Doe",
-      "id": 4,
-      "roll": 42,
-      "image": "qwem"
-    },
-    "345678": {
-      "name": "Mike Johnson",
-      "id": 5,
-      "roll": 19,
-      "image": "wert"
-    },
-    "876543": {
-      "name": "Emily Smith",
-      "id": 6,
-      "roll": 8,
-      "image": "aety"
-    },
-    "567890": {
-      "name": "David Doe",
-      "id": 7,
-      "roll": 51,
-      "image": "jkol"
-    },
-    "234567": {
-      "name": "Ella Johnson",
-      "id": 8,
-      "roll": 12,
-      "image": "plmn"
-    },
-    "242344": {
-      "name": "William Smith",
-      "id": 9,
-      "roll": 23,
-      "image": "awer"
-    },
-    "901234": {
-      "name": "Sophia Johnson",
-      "id": 10,
-      "roll": 30,
-      "image": "qwek"
-    }
+  "9155CS20": {
+    "user_name": "Imtiyaz-Ali",
+    "roll": 27,
+    "stream": "CS",
+    "img_data": "assets/students/me.jpeg"
+  },
+  "9028CS20": {
+    "user_name": "Kashinath S",
+    "roll": 30,
+    "stream": "CS",
+    "img_data": "assets/students/kashi.jpg"
+  },
+  "8842CS20": {
+    "user_name": "Govind P",
+    "roll": 26,
+    "stream": "CS",
+    "img_data": "assets/students/govind.jpg"
+  },
+  "9094CS20": {
+    "user_name": "AlanSavio",
+    "roll": 7,
+    "stream": "CS",
+    "img_data": "assets/students/savio.jpg"
   }
-  
+}

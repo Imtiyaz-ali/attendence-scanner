@@ -1,61 +1,76 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable, catchError, retry, throwError } from 'rxjs';
 
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css']
 })
-export class AdminComponent {
+export class AdminComponent implements OnInit{
+  studentStore: undefined;
+  teacherStore: Teachers | undefined;
+  constructor(private http: HttpClient) { }
 
-  // Users fake data
-  users: Users = {
-    '9155CS20': {
-      user_name: 'Imtiyaz-Ali',
-      roll: 27,
-      stream: "CS",
-      img: "assets/me.jpeg"
-    },
-    '9028CS20': {
-      user_name: 'Kashinath S',
-      roll: 30,
-      stream: "CS",
-      img: 'assets/kashi.jpg'
-    },
-    '8842CS20': {
-      user_name: 'Govind P',
-      roll: 26,
-      stream: 'CS',
-      img: 'assets/govind.jpg'
-    },
-    '9094CS20': {
-      user_name: 'AlanSavio',
-      roll: 7,
-      stream: 'CS',
-      img: 'assets/savio.jpg'
-    }
-  };
+  @ViewChild('edits') edit!: ElementRef;
 
-  teachers:Teachers={
-    '1234': {
-      user_name: 'ManJu',
-      class: 27,
-      subject: "Python Programming",
-      img: "assets/test.jpeg"
-    },
-    '5678': {
-      user_name: 'Apple Miss',
-      class: 10,
-      subject: "Discrete Math",
-      img: "assets/test.jpeg"
-    },
-    '9076': {
-      user_name: 'Cat',
-      class: 27,
-      subject: "Political Science",
-      img: "assets/test.jpeg"
-    }
+
+// variables
+  tempName="";
+  tempSubject=""
+  tempId=""
+  tempProfile=""
+  // 
+
+
+   ngOnInit(): void {
+    this.loadStudent()
+    this.loadTeacher()
   }
 
+  async loadStudent(){
+    this.http.get<any>('assets/database/student.json').subscribe((data) => {
+      this.studentStore = data;
+      
+    });
+  }
+
+  async loadTeacher(){
+    this.http.get<any>('assets/database/teacher.json').subscribe((data) => {
+      this.teacherStore = data;
+
+    });
+  }
+
+  editStudentData(){
+
+  }
+
+  editTeacherData(id:any){
+    const edit = document.getElementById("edits");
+    edit?.classList.add('showEdit')
+    console.log("DFS")
+    
+  }
+
+  handleError(error:Error){
+    alert(error.message)
+    return throwError(()=>error)
+  }
+  getBlogs():Observable<Teachers[]> {
+    let a = this.http.get<Teachers[]>('assets/database/teacher.json')
+    .pipe(retry(1),catchError(this.handleError))
+    let b = a.forEach(element => {
+      
+      // console.log(element[])1
+    });
+    this.http.delete<Teachers>('assets/database/teacher.json'+"1234")
+    .pipe(retry(1),catchError(this.handleError))
+    return a
+
+
+
+  }
 }
 
 interface User{
@@ -68,13 +83,13 @@ interface Users {
   [key: string]: User;
 }
 
+
 interface Teacher{
   user_name: string;
-  class: number;
   subject: string;
-  img: string;
+  stream: string;
+  img_data: string;
 }
 interface Teachers {
   [key: string]: Teacher;
 }
-

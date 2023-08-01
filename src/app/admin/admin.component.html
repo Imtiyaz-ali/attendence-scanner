@@ -86,23 +86,23 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let user of teachers | keyvalue">
+                                    <tr *ngFor="let user of teacherStore | keyvalue">
 
                                         <th scope="row">
                                             <li class="list-inline-item">
-                                                <button class="btn btn-success btn-sm rounded-0" type="button"
+                                                <button (click)="editTeacherData(user.key)" class="btn btn-success btn-sm rounded-0" type="button"
                                                     data-toggle="tooltip" data-placement="top" title="Edit"><i
                                                         class="fa fa-edit"></i></button>
                                             </li>
                                         </th>
-                                        <td>{{user}}</td>
+                                        <td>{{user.key}}</td>
 
-                                        <td><img class="user_image" *ngIf="user.value.img" [src]="user.value.img"> | {{
+                                        <td><img class="user_image" *ngIf="user.value.img_data" [src]="user.value.img_data"> | {{
                                             user.value.user_name }}</td>
                                         <td>{{
                                             user.value.subject }}</td>
                                         <td class="text-end"><span class="fw-bolder">{{
-                                            user.value.class }}</span> <i
+                                            user.value.stream }}</span> <i
                                                 class="fa fa-ellipsis-h  ms-2"></i></td>
                                     </tr>
 
@@ -155,13 +155,14 @@
                                         <th scope="col" width="5%">Edit</th>
                                         <th scope="col" width="10%">ID</th>
 
-                                        <th scope="col" width="40%">Teacher</th>
-                                        <th scope="col" width="25%">Subject</th>
-                                        <th scope="col" class="text-end" width="20%"><span>Class-Taken</span></th>
+                                        <th scope="col" width="40%">Student Profile</th>
+                                        <th scope="col" width="25%">Stream</th>
+                                        <th scope="col" class="text-end" width="20%"><span>Roll-No</span></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let user of users | keyvalue">
+
+                                    <tr *ngFor="let item of studentStore | keyvalue">
 
                                         <th scope="row">
                                             <li class="list-inline-item">
@@ -170,12 +171,12 @@
                                                         class="fa fa-edit"></i></button>
                                             </li>
                                         </th>
-                                        <td>{{user.value.roll}}</td>
+                                        <td>{{item.key}}</td>
 
-                                        <td><img class="user_image" *ngIf="user.value.img" [src]="user.value.img"> | {{
-                                            user.value.user_name }}</td>
-                                        <td>Wirecard for figma</td>
-                                        <td class="text-end"><span class="fw-bolder">$0.99</span> <i
+                                        <td><img class="user_image" *ngIf="item.value.img_data" [src]="item.value.img_data"> | {{
+                                            item.value.user_name }}</td>
+                                        <td>{{item.value.stream}}</td>
+                                        <td class="text-end"><span class="fw-bolder">{{item.value.roll}}</span> <i
                                                 class="fa fa-ellipsis-h  ms-2"></i></td>
                                     </tr>
 
@@ -202,8 +203,46 @@
             </div>
 
         </div>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor magnam illo incidunt suscipit inventore.
-            Officia dolore nulla nobis qui. Voluptas beatae nostrum ipsam, quidem corrupti incidunt nesciunt! Sit
-            suscipit harum tempora, enim, sapiente odio dolores, incidunt iure ipsa magni eum. Aspernatur tempore,
-            molestiae id quos eos error possimus. At, commodi.</p>
+        
     </div>
+
+<!-- edit -->
+
+<!-- modal -->
+
+<div id="edits" class="edit">
+    
+    <div class="form-bg">
+        <div class="container">
+               
+                    <div style="width: 600px;" class="form-container">
+                        <div class="form-icon">
+        
+                            <div class="avatar">
+                                <img style="width: 95px; height: 95px; object-fit: cover;" src="assets/me2.jpeg" alt="Avatar">
+                            </div>	
+                            <span class="signup"><button>Upload File</button></span>
+                        </div>
+                        <form class="form-horizontal">
+                            <h3 class="title">Edit Profile</h3>
+                            <div class="form-group">
+                                <span class="input-icon"><i class="fa fa-at"></i></span>
+                                <input [value]="tempName" class="form-control" type="text" placeholder="Email Address">
+                            </div>
+                            <div class="form-group">
+                                <span class="input-icon"><i class="	fa fa-id-card"></i></span>
+                                <input [value]="tempId" class="form-control" type="text" placeholder="Email Address">
+                            </div>
+                            <div class="form-group">
+                                <span class="input-icon"><i class="fa fa-institution"></i></span>
+                                <input [value]="tempSubject" class="form-control" type="text" placeholder="Password">
+                            </div>
+                            
+                            <button class="btn signin">Login</button>
+                            <span class="forgot-pass"><a href="#">Forgot Username/Password?</a></span>
+                        </form>
+                    </div>
+                </div>
+       
+    </div>
+</div> 
