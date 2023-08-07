@@ -247,7 +247,7 @@ tr{
 
 /* modal */
 .form-container{
-  background: linear-gradient(#E9374C,#D31128);
+  background: linear-gradient(#e9374cab,#d31128a4);
   font-family: 'Roboto', sans-serif;
   font-size: 0;
   padding: 0 15px;
@@ -305,7 +305,7 @@ tr{
   border-radius: 20px;
 }
 .form-horizontal .input-icon{
-  color: #b5b5b5;
+  color: #666363;
   font-size: 15px;
   text-align: center;
   line-height: 38px;
@@ -315,7 +315,7 @@ tr{
   display: inline-block;
 }
 .form-horizontal .form-control{
-  color: #b5b5b5;
+  color: #5c4e4e;
   background-color: transparent;
   font-size: 14px;
   letter-spacing: 1px;
@@ -388,7 +388,7 @@ tr{
 }
 .showEdit{
   display: block;
-  animation: editanimation 1s linear;
+  animation: editanimation 0.7s linear;
 }
 @keyframes editanimation {
   0%{

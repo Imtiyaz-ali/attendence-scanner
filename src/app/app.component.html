@@ -1,4 +1,47 @@
-<div class="app-container">
+<div *ngIf="!teacher_logged" class="login">
+
+  <form [formGroup]="loginForm" (ngSubmit)="logIn()" id="login-form" class="login-form" autocomplete="off" role="main">
+    <h1 class="a11y-hidden">Login Form</h1>
+    <div>
+      <label class="label-email">
+        <input formControlName="id" type="text" class="text" name="Enter Your ID" placeholder="Enter College-ID" tabindex="1" required />
+        <span class="required">College ID</span>
+      </label>
+    </div>
+    <input type="checkbox" name="show-password" class="show-password a11y-hidden" id="show-password" tabindex="3" />
+    <label class="label-show-password" for="show-password">
+      <span>Show Password</span>
+    </label>
+    <div>
+      <label class="label-password">
+        <input formControlName="password" type="text" class="text" name="password" placeholder="Password" tabindex="2" required />
+        <span class="required">Password</span>
+      </label>
+    </div>
+    <input type="submit" value="Log In" />
+    <!-- <div class="email">
+      <a href="#">Forgot password?</a>
+    </div> -->
+    <figure aria-hidden="true">
+      <div class="person-body"></div>
+      <div class="neck skin"></div>
+      <div class="head skin">
+        <div class="eyes"></div>
+        <div class="mouth"></div>
+      </div>
+      <div class="hair"></div>
+      <div class="ears"></div>
+      <div class="shirt-1"></div>
+      <div class="shirt-2"></div>
+    </figure>
+  </form>
+	
+
+
+</div>
+
+
+<div *ngIf="teacher_logged" class="app-container">
   <div class="sidebar">
     <div class="sidebar-header" style="background: rgba(245, 245, 245, 0.842)">
       <div class="app-icon">
@@ -41,23 +84,37 @@
         </a>
       </li>
 
+      <li class="sidebar-list-item" routerLinkActive="active">
+        <a routerLink="/student">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+          class="feather feather-inbox">
+          <polyline points="22 12 16 12 14 15 10 15 8 12 2 12" />
+          <path
+            d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z" />
+        </svg>
+          <span>Student</span>
+        </a>
+      </li>
     </ul>
+
+
     <div class="account-info">
       <div class="account-info-picture">
         <img
-          src="assets/profile.jpg?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTE2fHx3b21hbnxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=900&q=60"
-          alt="Account">
+        [src]="teacher_profile"
+           alt="Account">
       </div>
-      <div class="account-info-name">Imityaz Ali</div>
-      <button class="account-info-more">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-          class="feather feather-more-horizontal">
-          <circle cx="12" cy="12" r="1" />
-          <circle cx="19" cy="12" r="1" />
-          <circle cx="5" cy="12" r="1" />
-        </svg>
+      <div class="account-info-name">{{teacher_name}}</div>
+
+      <button (click)="logout()" class="account-info-more" >
+
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
       </button>
+
+
+     
+
     </div>
   </div>
   <div class="mobileNav">
@@ -88,9 +145,22 @@
         </svg>
       </button>
 
+       <!--  -->
+ <div class="btn-group">
+  <button style="height: 35px;background-color: grey;" type="button" class="btn btn-success dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+    Select Devices
+  </button>
+      
+  <ul class="dropdown-menu">
+    <!-- <li *ngFor="let c of scanner!.devices.value"><a class="dropdown-item" href="#">Action</a></li>
+     -->
+     <!-- <option *ngFor="let c of scanner!.devices.value; let i = index" [value]="c.deviceId" [selected]="i == scanner?.deviceActive">{{c.label}}</option> -->
+  </ul>
+</div>
+
       <!-- dark -->
       <div id="menu_button" class="menu__button">
-        <input (click)="mobileNav()" type="checkbox" id="menu_checkbox">
+        <!-- <input (click)="mobileNav()" type="checkbox" id="menu_checkbox"> -->
         <label for="menu_checkbox" id="menu_label">
           <div id="menu_text_bar"></div>
         </label>
@@ -111,9 +181,9 @@
 <section class="menu__body" hidden="hidden">
   <div class="d-flex justify-content-between align-items-center">
     <h3>Navigate</h3>
-    <button (click)="mobileNav()" type="button" class="btn btn-link" aria-label="Close">
+    <!-- <button (click)="mobileNav()" type="button" class="btn btn-link" aria-label="Close"> -->
       <span aria-hidden="true">&times;</span>
-    </button>
+    <!-- </button> -->
   </div>
 
   <ul class="list-group">
@@ -148,7 +218,7 @@
           <path
             d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z" />
         </svg>
-    </i> Contact</li>
+    </i> Contactdd</li>
   </ul>
 
 </section>

@@ -1,6 +1,7 @@
-import { Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
+import { Component,ChangeDetectorRef, ElementRef, OnInit, Renderer2, NgZone} from '@angular/core';
+import { AttendenceService } from '../services/attendence.service';
+import { HttpClient } from '@angular/common/http';
 
-import { AttendanceService } from './data.service';
 declare var $: any;
 @Component({
   selector: 'app-teacher',
@@ -9,129 +10,123 @@ declare var $: any;
   ]
 })
 export class TeacherComponent implements OnInit {
+  constructor(private cdRef: ChangeDetectorRef,private ngZone: NgZone,private el: ElementRef, private renderer: Renderer2, private AttendenceService: AttendenceService, private http: HttpClient) { }
 
+  // basic variables [] represent empty list/array.... any defines data type
+  attendence_data: any[] | undefined;
+  retreivedData:any[] = [];
 
-  attendanceData!: any[];
-  constructor(private el: ElementRef, private renderer: Renderer2,private attendanceService: AttendanceService) { }
-  loadingData: any;
+  // load attendence data
+  async loadAttendence(month: any):Promise<void> {
 
-  async loadData(): Promise<void> {
     try {
-      this.loadingData = true;
-      const data = await this.attendanceService.getAttendanceData().toPromise();
-      this.attendanceData = data;
-      console.log(data);
-      console.log(this.attendanceData[0]);
-    this.getCalender()
-
-    } catch (error) {
-      console.error(error);
-    } finally {
-      this.loadingData = false;
-    }
-  }
-
-  getCalender(){
-
-    // attendence
-
-    // Using forEach method
-    if (this.attendanceData) {
-      this.attendanceData.forEach((attendance) => {
-        if (attendance.class == true) {
-          const total = 56
-          const present = attendance.absent - total
-
-          $("#calendar").evoCalendar("addCalendarEvent", [
-            {
-              id: attendance.date,
-              name: `Attendence(${attendance.date})`,
-              date: `${attendance.date}/2023`, 
-              type: "event",
-              // everyYear: true,
-              color: "green",
-              description: `Total-Absents: ${attendance.absent}`
-            },
-            {
-              id:`Absent ${attendance.date}`,
-              name: "Absentees Roll-No",
-              date: `${attendance.date}/2023`, 
-              type: "event",
-              // everyYear: true,
-              color: "red",
-              description: `${attendance.rollNo}`
-            },
-            {
-              id:`Leave ${attendance.leave}`,
-              name: "On-Leave Roll-No",
-              date: `${attendance.date}/2023`, 
-              type: "event",
-              // everyYear: true,
-              color: "blue",
-              description: `${attendance.leave}`
-            }
-
-          ]);
-        } else {
-          $("#calendar").evoCalendar("addCalendarEvent", [
-            {
-              id: attendance.date,
-              name: `No Class`,
-              date: `${attendance.date}/2023`, // Repeat every 7 days
-              type: "holiday",
-              // everyYear: true,
-              // color: "pink",
-              description: `No Class Has Taken On This Day`
-            },
-
-          ]);
-        }
+      //gett the data of specific month
+      this.AttendenceService.getAllAttendence(month).subscribe((data) => {
+        this.attendence_data = data;
       });
+
+      // access calender from html
+      const calendarEl = this.el.nativeElement.querySelector('#calendar');
+      calendarEl.style.opacity = 0.2;
+
+      setTimeout(() => {
+        this.addToCalender()    
+        calendarEl.style.opacity = 1;
+      }, 2000);
+      
+    } catch (e) {
+      alert(e)
     }
+}
 
-  
-
+// 
+checkData(data:any){
+  if(this.retreivedData.length>0){
+    for(let i=0;i<this.retreivedData.length;i++)
+        if(this.retreivedData[i]==data)
+              return true
   }
+  return false
+}
 
 
-  ngOnInit(): void {
-    this.loadData()
+  async ngOnInit() {
+    await this.loadAttendence("1")
     $('#calendar').evoCalendar({
       theme: 'Midnight Blue',
-      // eventListNoEventsText: "No Class Taken On This Day." 
     })
     $('#calendar').evoCalendar('toggleSidebar', false);
-    this.getCalender()
-    
-    setTimeout(() => {
-
-      $("#calendar").evoCalendar("addCalendarEvent", [
-        {
-          id: "123",
-          name: "dxfg",
-          date: `04/04/2023`, // Repeat every 7 days
-          type: "event",
-          // everyYear: true,
-          color: "green",
-          description: `Total-Absents:`
-        }])
-      
-    }, 3000);
-    
+    $('#calendar').evoCalendar('selectMonth', 5);
+    this.onMonthChange()
+  }
+  // test
+  onMonthChange(){
+    $('#calendar').on('selectMonth', (event:any, activeMonth:any, monthIndex:any) => {
+      this.ngZone.run(() => {
+        console.log("Asdf", event, activeMonth, monthIndex + 1);
+        if(this.checkData(monthIndex+1)){
+          return
+        }
+        this.loadAttendence(`${monthIndex+1}`)
+      });
+    });
   }
 
-  addEvent() {
-    const event = {
-      id: '345345',
-      name: '345',
-      date: '04/04/2023',
-      type: 'event',
-      color: 'green',
-      description: 'Total-Absents:'
-    };
+  // add datas to calender
+  addToCalender() {
+
+    // its to check wheather if data is already on calendar
+    let monthId = this.attendence_data!["id" as any];
+    if(this.checkData(monthId)){
+      return
+    }
+    this.retreivedData.push(monthId)
+    
+    let monthData = this.attendence_data![monthId];
     const calendarEl = this.el.nativeElement.querySelector('#calendar');
     const calendar = $(calendarEl);
-    calendar.evoCalendar('addCalendarEvent', [event]);
+
+    for (let i in monthData) {
+      let day = parseInt(i) + 1;
+      let total = 56;
+      if (monthData[i] == false) {
+        calendar.evoCalendar("addCalendarEvent",
+          {
+            id: `kuchbhi`,
+            name: `No Class`,
+            date: `${monthId}/${day}/2023`, 
+            type: "holiday",
+            description: `No Class Has Taken On This Day`
+          },
+        );
+
+      } else {
+
+        calendar.evoCalendar("addCalendarEvent", [
+          {
+            id: `kuchbhi`,
+            name: `Total Student: (${total})`,
+            date: `${monthId}/${day}/2023`,
+            type: "birthday",
+            color: "blue",
+            description: `Total-Absents: ${monthData[i].length}`
+          },
+          {
+            id: `kuchbhi`,
+            name: `Attendence Date(08/${i + 1})`,
+            date: `${monthId}/${day}/2023`,
+            type: "event",
+            color: "green",
+            description: `Absent Roll-No: ${monthData[i]}`
+          },
+
+        ])
+      }
+      this.cdRef.detectChanges();
+    }
+
+    
   }
-  
 }
+
+

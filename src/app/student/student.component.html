@@ -1,0 +1,171 @@
+<div class="mainBody">
+  <form [formGroup]="idForm" (ngSubmit)="fetchData()">
+
+    <div id="search">
+      <svg style="width: 400px;" viewBox="0 0 420 60" xmlns="http://www.w3.org/2000/svg">
+        <rect class="bar" />
+
+        <g class="magnifier">
+          <circle class="glass" />
+          <line class="handle" x1="32" y1="32" x2="44" y2="44"></line>
+        </g>
+
+        <g class="sparks">
+          <circle class="spark" />
+          <circle class="spark" />
+          <circle class="spark" />
+        </g>
+
+        <g class="burst pattern-one">
+          <circle class="particle circle" />
+          <path class="particle triangle" />
+          <circle class="particle circle" />
+          <path class="particle plus" />
+          <rect class="particle rect" />
+          <path class="particle triangle" />
+        </g>
+        <g class="burst pattern-two">
+          <path class="particle plus" />
+          <circle class="particle circle" />
+          <path class="particle triangle" />
+          <rect class="particle rect" />
+          <circle class="particle circle" />
+          <path class="particle plus" />
+        </g>
+        <g class="burst pattern-three">
+          <circle class="particle circle" />
+          <rect class="particle rect" />
+          <path class="particle plus" />
+          <path class="particle triangle" />
+          <rect class="particle rect" />
+          <path class="particle plus" />
+        </g>
+      </svg>
+
+      <input placeholder="Enter ID Card No" formControlName="id" style="color: white;" type=search aria-label="Search for inspiration" />
+    </div>
+  </form>
+
+  <div *ngIf="searchingDatabase" style="display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;" id="results">
+    <svg class="lp" viewBox="0 0 128 128" width="128px" height="128px" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="grad1" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#000" />
+          <stop offset="100%" stop-color="#fff" />
+        </linearGradient>
+        <mask id="mask1">
+          <rect x="0" y="0" width="128" height="128" fill="url(#grad1)" />
+        </mask>
+      </defs>
+      <g fill="none" stroke-linecap="round" stroke-width="16">
+        <circle class="lp__ring" r="56" cx="64" cy="64" stroke="#ddd" />
+        <g stroke="hsl(183,90%,40%)">
+          <polyline class="lp__fall-line" points="64,8 64,120" />
+          <polyline class="lp__fall-line lp__fall-line--delay1" points="64,8 64,120" />
+          <polyline class="lp__fall-line lp__fall-line--delay2" points="64,8 64,120" />
+          <polyline class="lp__fall-line lp__fall-line--delay3" points="64,8 64,120" />
+          <polyline class="lp__fall-line lp__fall-line--delay4" points="64,8 64,120" />
+          <circle class="lp__drops" r="56" cx="64" cy="64" transform="rotate(90,64,64)" />
+          <circle class="lp__worm" r="56" cx="64" cy="64" transform="rotate(-90,64,64)" />
+        </g>
+        <g stroke="hsl(93,90%,40%)" mask="url(#mask1)">
+          <polyline class="lp__fall-line" points="64,8 64,120" />
+          <polyline class="lp__fall-line lp__fall-line--delay1" points="64,8 64,120" />
+          <polyline class="lp__fall-line lp__fall-line--delay2" points="64,8 64,120" />
+          <polyline class="lp__fall-line lp__fall-line--delay3" points="64,8 64,120" />
+          <polyline class="lp__fall-line lp__fall-line--delay4" points="64,8 64,120" />
+          <circle class="lp__drops" r="56" cx="64" cy="64" transform="rotate(90,64,64)" />
+          <circle class="lp__worm" r="56" cx="64" cy="64" transform="rotate(-90,64,64)" />
+        </g>
+      </g>
+    </svg>
+    <h6>[LoadingData]</h6>
+  </div>
+
+
+  <div *ngIf="showData" id="tables">
+    <div class="container mt-5 px-2">
+
+      <div class="mb-2 d-flex justify-content-between align-items-center">
+
+        <!-- date -->
+        <div class="position-relative">
+
+          <div class="select" tabindex="1">
+            <div *ngFor="let m of months;let i=index">
+              <input (click)="changeMonth(i)" class="selectopt" name="test" type="radio" [id]="'opt' + i"
+                [checked]="i === 0">
+              <label [for]="'opt' + i" class="option">{{m}}</label>
+
+            </div>
+          </div>
+
+
+
+          <div style="position: relative" class="px-2">
+            <p><strong>Student-ID: </strong><span>{{student_name}} | </span> <strong>Roll-No: </strong>{{student_roll}}</p>
+          </div>
+
+        </div>
+      </div>
+      <div class="table-responsive">
+        <table class="table table-responsive table-borderless">
+          <thead>
+            <tr class="bg-light">
+              <th scope="col" width="5%"><input class="form-check-input" type="checkbox"></th>
+              <!-- <th scope="col" width="5%">#</th> -->
+              <th scope="col" width="15%">Date</th>
+              <th scope="col" width="10%">Status</th>
+              <th scope="col" width="25%">Name</th>
+              <th scope="col" width="25%">Status2</th>
+              <th scope="col" class="text-end" width="20%"><span>Attendence</span></th>
+            </tr>
+          </thead>
+
+          <tbody>
+
+            <ng-container *ngFor="let item of attendence_data;let i=index">
+
+              <tr style="border-bottom: 1px solid grey;" *ngIf="item">
+                <th scope="row"><input disabled value="---" class="form-check-input" type="checkbox"></th>
+                <!-- <td>aa</td> -->
+                <td>{{ i + 1 }}/{{ selectedMonth}}/23</td>
+                <td><i ngClass="" class="fa fa-check-circle-o green"></i><span class="ms-1"></span></td>
+                <td>{{student_name}}</td>
+                <!-- <ng-container *ngIf="!item.include(27)"> -->
+                <td>Class Day</td>
+                <!-- </ng-container> -->
+                <ng-container *ngIf="item.includes(student_roll); else notPresent">
+                  <td style="color: rgb(194, 16, 10);" class="text-end">Absent</td>
+
+                </ng-container>
+                <ng-template #notPresent>
+                  <td style="color: green;" class="text-end">present</td>
+
+                </ng-template>
+              </tr>
+
+              <tr style="border-bottom: 1px solid grey;" *ngIf="item==false">
+                <th scope="row"><input disabled value="---" class="form-check-input" type="checkbox"></th>
+                <!-- <td>aa</td> -->
+                <td>{{i+1}}/{{ selectedMonth}}/23</td>
+                <td><i class="fa fa-check-circle-o"></i><span class="ms-1"></span></td>
+                <td>-----</td>
+                <td>No-Class</td>
+                <td class="text-end"><span class="fw-bolder">----</span> <i class="fa fa-ellipsis-h  ms-2"></i></td>
+              </tr>
+            </ng-container>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+  </div>
+
+</div>

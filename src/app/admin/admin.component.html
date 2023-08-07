@@ -6,7 +6,7 @@
         <div class="welcome">
             <div class="content rounded-3 p-3">
                 <h1 class="fs-3">Welcome to Admin Dashboard</h1>
-                <p class="mb-0">Here You Can Add And Manipulate Data Of Student/Teachers.</p>
+                <p class="mb-0">Here You Can Add And Edit Data Of Student/Teachers.</p>
             </div>
         </div>
 
@@ -86,16 +86,16 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr *ngFor="let user of teacherStore | keyvalue">
+                                    <tr *ngFor="let user of teachers | keyvalue">
 
                                         <th scope="row">
                                             <li class="list-inline-item">
-                                                <button (click)="editTeacherData(user.key)" class="btn btn-success btn-sm rounded-0" type="button"
+                                                <button (click)="editDatas(user.value.id)" class="btn btn-success btn-sm rounded-0" type="button"
                                                     data-toggle="tooltip" data-placement="top" title="Edit"><i
                                                         class="fa fa-edit"></i></button>
                                             </li>
                                         </th>
-                                        <td>{{user.key}}</td>
+                                        <td>{{user.value.id}}</td>
 
                                         <td><img class="user_image" *ngIf="user.value.img_data" [src]="user.value.img_data"> | {{
                                             user.value.user_name }}</td>
@@ -162,7 +162,7 @@
                                 </thead>
                                 <tbody>
 
-                                    <tr *ngFor="let item of studentStore | keyvalue">
+                                    <tr *ngFor="let item of students | keyvalue">
 
                                         <th scope="row">
                                             <li class="list-inline-item">
@@ -171,7 +171,7 @@
                                                         class="fa fa-edit"></i></button>
                                             </li>
                                         </th>
-                                        <td>{{item.key}}</td>
+                                        <td>{{item.value.id}}</td>
 
                                         <td><img class="user_image" *ngIf="item.value.img_data" [src]="item.value.img_data"> | {{
                                             item.value.user_name }}</td>
@@ -219,27 +219,29 @@
                         <div class="form-icon">
         
                             <div class="avatar">
-                                <img style="width: 95px; height: 95px; object-fit: cover;" src="assets/me2.jpeg" alt="Avatar">
+                                <img style="width: 95px; height: 95px; object-fit: cover;" [src]="tempProfile" alt="Avatar">
                             </div>	
-                            <span class="signup"><button>Upload File</button></span>
+                            <p></p>
+                            <button type="button" class="btn btn-success">Edit Image</button>
                         </div>
-                        <form class="form-horizontal">
+                        <form [formGroup]="signupForm" onsubmit="return false" class="form-horizontal">
                             <h3 class="title">Edit Profile</h3>
                             <div class="form-group">
-                                <span class="input-icon"><i class="fa fa-at"></i></span>
-                                <input [value]="tempName" class="form-control" type="text" placeholder="Email Address">
+                                <span class="input-icon"><i class="fa fa-home"></i></span>
+                                <input required class="form-control" type="text" placeholder="User-Name" id="name" formControlName="name" >
                             </div>
                             <div class="form-group">
-                                <span class="input-icon"><i class="	fa fa-id-card"></i></span>
-                                <input [value]="tempId" class="form-control" type="text" placeholder="Email Address">
+                                <span class="input-icon"><i class="fa fa-bars"></i></span>
+                                <input required class="form-control" type="text" placeholder="User-Id" formControlName="id">
                             </div>
                             <div class="form-group">
-                                <span class="input-icon"><i class="fa fa-institution"></i></span>
-                                <input [value]="tempSubject" class="form-control" type="text" placeholder="Password">
+                                <span class="input-icon"><i class="fa fa-folder"></i></span>
+                                <input required class="form-control" type="text" placeholder="Subject" formControlName="subject">
                             </div>
                             
-                            <button class="btn signin">Login</button>
-                            <span class="forgot-pass"><a href="#">Forgot Username/Password?</a></span>
+                            <button style="background-color: #897275;" class="btn">CANCEL</button>
+                            <button (click)="updateData()" type="submit" class="btn signin">SUBMIT</button>
+                
                         </form>
                     </div>
                 </div>

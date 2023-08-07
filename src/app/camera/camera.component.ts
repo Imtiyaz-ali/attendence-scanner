@@ -1,10 +1,9 @@
-
-
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { NgxScannerQrcodeComponent } from 'ngx-scanner-qrcode';
 import * as faceapi from 'face-api.js';
-// import { catchError } from 'rxjs';
-
+import { TeacherAppService } from '../services/teacher.service';
+import { StudentAppService } from '../services/student.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-camera',
@@ -12,8 +11,7 @@ import * as faceapi from 'face-api.js';
   styleUrls: ['./camera.component.css']
 })
 export class CameraComponent implements OnInit {
-
-
+  constructor(private TeacherAppService: TeacherAppService,private StudentAppService:StudentAppService, private http: HttpClient) { }
   // basic Variables
   show_timer = true
   flip_card = false;
@@ -26,73 +24,34 @@ export class CameraComponent implements OnInit {
   message = "Loading";
   faceRecoginising = false
   // 
+  students: any[] | undefined;
   user_image = "assets/needs/frame.png"
   user_name = "Message"
   user_message = "Scan ID Card Below"
 
   // face
   face_scanning_interval: any;
-  tries:number=3;
+  tries: number = 3;
 
-
-  // Elements and Components
-  //help to access elements in html
   @ViewChild('action') scanner?: NgxScannerQrcodeComponent;
   @ViewChild('recogination') recogination?: NgxScannerQrcodeComponent;
-  @ViewChild('videoElement') videoElement: any;
-  @ViewChild('canvasElement') canvasElement: any;
   @ViewChild('usermsg') usermsg!: ElementRef;
 
-
-  // Users fake data
-  users: Users = {
-    '9155CS20': {
-      user_name: 'Imtiyaz-Ali',
-      roll: 27,
-      stream: "CS",
-      img: "assets/students/me.jpeg"
-    },
-    '9028CS20': {
-      user_name: 'Kashinath S',
-      roll: 30,
-      stream: "CS",
-      img: 'assets/students/kashi.jpg'
-    },
-    '8842CS20': {
-      user_name: 'Govind P',
-      roll: 26,
-      stream: 'CS',
-      img: 'assets/students/govind.jpg'
-    },
-    '9094CS20': {
-      user_name: 'AlanSavio',
-      roll: 7,
-      stream: 'CS',
-      img: 'assets/students/savio.jpg'
-    }
-  };
-
-  // will run whren this function automatically when page first loaded
   async ngOnInit() {
     this.user_message = "Model is Loading";
-
+    this.loadStudent()
   }
 
-  //automatic run after whole page loaded
   async ngAfterViewInit() {
-
     setTimeout(() => {
-        this.loadModels();
-        this.user_name = "Message"
-        this.user_message = "Scan Your ID Card"
-      
-        this.show_timer = false
-        this.playUserAnim()
+      // this.loadModels();
+      this.user_name = "Message"
+      this.user_message = "Scan Your ID Card"
+      this.show_timer = false
+      this.playUserAnim()
     }, 3000);
-    this.scanner?.start()
+    // this.scanner?.start()
   }
-
-// will run when we leave this page
   ngOnDestroy() {
     if (this.scanner?.isStart) {
       this.scanner?.stop();
@@ -100,11 +59,8 @@ export class CameraComponent implements OnInit {
       this.cameraloading = true;
     }
   }
-
   // custom load face recoginisation model in the page
   loadModels() {
-
-  console.log("Model")
     const MODEL_URL = './assets/models/';
     const modelsToLoad = [
       faceapi.loadSsdMobilenetv1Model(MODEL_URL),
@@ -124,29 +80,32 @@ export class CameraComponent implements OnInit {
       });
   }
 
-// check if student present in database or not
+  // load students
+  async loadStudent() {
+    this.StudentAppService.getAllStudent().subscribe((data) => {
+      this.students = data;
+    });
+  }
+
+  // check if student present in database or not
   checkUser(key: any) {
-    for (let keys in this.users) {
-      if (key === keys) {
-        this.user_name = this.users[key as keyof Users].user_name;
-        this.user_name = this.users[key as keyof Users].user_name;
-        this.user_image = this.users[key as keyof Users].img;
+
+    for (let keys in this.students) {
+      if (key === this.students?.at(keys as any).id) {
+        this.user_name = this.students?.at(key as any).user_name;
+        this.user_image = this.students?.at(key as any).img_data;
         this.user_message = "Complete Face Scanning"
-        this.roll = this.users[key as keyof Users].roll;
-        this.id = key;
+        this.roll = this.students?.at(key as any).roll;
+        this.id = this.students?.at(key as any).id;
         return true;
       }
     }
     return false;
   }
-
-  // after succesfull qr code scanned it will run automatically
   scanSuccessHandler(result: any) {
 
-    // extract useful data from qrcode
     const userData = result[0]["value"] as string;
 
-    // if qrcode shown during face recogination
     if (this.faceRecoginising) {
       this.user_message = "Face Recogination Still Going On"
       this.playUserAnim()
@@ -155,31 +114,20 @@ export class CameraComponent implements OnInit {
 
     const temp = '9094CS20';
 
-    // pause the camera
     this.scanner?.pause();
 
-    // chesck in databse for user
     const user_found = this.checkUser(userData);
 
-    // popup data stored when data found/notfound trigger css
     const alerting = document.getElementById("alerting");
     const falerting = document.getElementById("alertingfail");
     var butt = user_found ? document.getElementById("buttonAnim") : document.getElementById("buttonAnim1")
 
-    // if user found succesfuuly
     if (user_found) {
       this.playUserAnim()
 
       this.faceRecoginising = true
-      
-// added css to animated userfound
+
       alerting?.classList.add('showAlert')
-
-      // run specific command/code after givrn time
-
-// setTimeout(() => {
-  // your code
-// }, time);time in milisecond 1000 ms =1s
 
       setTimeout(() => {
 
@@ -193,22 +141,19 @@ export class CameraComponent implements OnInit {
         }, 3000);
       }, 2000)
 
-      // after 5 second of successfull qr code scanned run this code
       setTimeout(() => {
-        try{
+        try {
 
-          // store all data coming from camera to this variable
-        const video = this.scanner?.video.nativeElement;
-// send those data to this function for face recoginising
-        this.startRecogination(video)
-        }catch(e){
+          const video = this.scanner?.video.nativeElement;
+          this.startRecogination(video)
+        } catch (e) {
           console.log(e)
         }
       }, 5000);
 
-      
+
     } else {
-// show alert if there no user data found
+
       falerting?.classList.add('showAlert')
       this.user_message = "Error!Try Again"
       this.playUserAnim()
@@ -218,37 +163,21 @@ export class CameraComponent implements OnInit {
         this.user_message = "Scan ID Card"
 
         this.scanner?.play()
-      }, 2000);
+      }, 3000);
     }
   }
 
-  // function for face recogination through camerea
+
   startRecogination(video: any) {
-
-    this.tries=3
-
-    // setTimeout(() => {
-      
-    // }, 11000);
-
-    // setInterval(()=>{
-    //   // code
-    // },1000)
-
-     this.face_scanning_interval = setInterval(async () => {
-
-      if(this.tries==0){
-        this.user_message="Not Identified.Reported To Admin"
-        this.faceRecoginising=false
+    this.tries = 3
+    this.face_scanning_interval = setInterval(async () => {
+      if (this.tries == 0) {
+        this.user_message = "Not Identified.Reported To Admin"
+        this.faceRecoginising = false
         this.playUserAnim()
-
-        // help to stop the interval
         clearInterval(this.face_scanning_interval);
       }
-
-      // face recoginisiting from camer
       const detections = await faceapi.detectAllFaces(video).withFaceLandmarks().withFaceDescriptors();
-
       if ((detections).length > 0) {
         this.scanner?.stop()
 
@@ -259,7 +188,6 @@ export class CameraComponent implements OnInit {
           setTimeout(() => {
             this.scanner?.start()
           }, 3000);
-
         } else {
           this.user_message = "Comparing Faces"
           this.playUserAnim()
@@ -274,14 +202,13 @@ export class CameraComponent implements OnInit {
   async compareFaces(user_image: string, faceImage2: any) {
 
     const image1 = await faceapi.fetchImage(user_image);
-    // Detect faces and extract descriptors
+
     const descriptors1 = await faceapi.detectAllFaces(image1).withFaceLandmarks().withFaceDescriptors();
-    // Check if at least one face is detected in each image
+
     if (descriptors1.length > 0 && faceImage2.length > 0) {
-      // Calculate the distance between the face descriptors
+
       const compared_data = faceapi.euclideanDistance(descriptors1[0].descriptor, faceImage2[0].descriptor);
 
-      // Compare the distance and set a threshold for similarity
       const similarityThreshold = 0.6;
       if (compared_data < similarityThreshold) {
         this.faceRecoginising = false
@@ -289,28 +216,26 @@ export class CameraComponent implements OnInit {
 
         this.playUserAnim()
         clearInterval(this.face_scanning_interval);
-        this.flip_card=true
+        this.flip_card = true
 
-      this.faceRecoginationSuccess() 
-  
-      // // 
+        this.faceRecoginationSuccess()
+        
         setTimeout(() => {
-
           this.flip_card = false
-          this.user_name="Message"
-          this.user_message="Scan You ID Card"
-          this.user_image="assets/needs/frame.png"
+          this.user_name = "Message"
+          this.user_message = "Scan You ID Card"
+          this.user_image = "assets/needs/frame.png"
           this.scanner?.start()
         }, 3000);
       } else {
         console.log('Faces are different.It Will Get Reported');
         this.user_message = "Face Not Matched.Try Again"
-        this.tries =this.tries-1
+        this.tries = this.tries - 1
         this.playUserAnim()
         setTimeout(() => {
           this.scanner?.start()
         }, 3000);
-      
+
       }
     } else {
       console.log('No faces detected in one or both images');
@@ -321,7 +246,7 @@ export class CameraComponent implements OnInit {
     }
   }
 
-  faceRecoginationSuccess(){
+  faceRecoginationSuccess() {
     console.log("ASdf")
   }
 
@@ -343,6 +268,6 @@ interface User {
   img: string;
 }
 
-interface Users {
+interface students {
   [key: string]: User;
 }

@@ -1,0 +1,586 @@
+.mainBody{
+    height: 100vh;
+    overflow: auto;
+}
+
+
+/* css */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
+
+body{
+    font-family: 'Open Sans', sans-serif;
+    
+}
+.search{
+  
+  top:6px;
+  left:10px;
+}
+
+.form-control{
+    
+    border:none;
+    padding-left:32px;
+}
+
+.form-control:focus{
+    
+    border:none;
+    box-shadow:none;
+}
+
+.green{
+    
+    color:green;
+}
+.red{
+  color: red;
+}
+
+#tables{
+    padding: 10px;
+    background: darkgray;
+    border: 2px solid white;
+    border-radius: 20px;
+    margin: 20px;
+}
+
+/* ate */
+
+.select {
+  display:flex;
+  flex-direction: column;
+  position:relative;
+  width:250px;
+  height:40px;
+}
+
+.option {
+  padding:0 30px 0 10px;
+  min-height:40px;
+  display:flex;
+  align-items:center;
+  background:#333;
+  border-top:#222 solid 1px;
+  position:absolute;
+  top:0;
+  width: 100%;
+  pointer-events:none;
+  order:2;
+  z-index:1;
+  transition:background .4s ease-in-out;
+  box-sizing:border-box;
+  overflow:hidden;
+  white-space:nowrap;
+  color: rgb(212, 206, 206);
+  
+}
+
+.option:hover {
+  background:#666;
+}
+
+.select:focus .option {
+  position:relative;
+  pointer-events:all;
+}
+
+.select input {
+  opacity:0;
+  position:absolute;
+  left:-99999px;
+}
+
+.select input:checked + label {
+  order: 1;
+  z-index:2;
+  background:#252323;
+  color: white;
+  border-top:none;
+  position:relative;
+}
+
+.select input:checked + label:after {
+  content:'';
+  width: 0; 
+	height: 0; 
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	border-top: 5px solid white;
+  position:absolute;
+  right:10px;
+  top:calc(50% - 2.5px);
+  pointer-events:none;
+  z-index:3;
+  color: white;
+
+}
+
+.select input:checked + label:before {
+  position:absolute;
+  right:0;
+  height: 40px;
+  width: 40px;
+  content: '';
+
+  background:#666;
+
+}
+
+/* search */
+#search {
+	display: grid;
+	grid-area: search;
+	grid-template:
+		"search" 60px
+		/ 420px;
+	justify-content: center;
+	align-content: center;
+	justify-items: stretch;
+	align-items: stretch;
+  margin-top: 30px;
+  margin-bottom: 30px;
+	/* background: hsl(0, 0%, 99%); */
+}
+
+#search input {
+	display: block;
+	grid-area: search;
+	-webkit-appearance: none;
+	appearance: none;
+	width: 100%;
+	height: 100%;
+	background: none;
+	padding: 0 30px 0 60px;
+	border: none;
+	border-radius: 100px;
+	font: 24px/1 system-ui, sans-serif;
+	outline-offset: -8px;
+}
+
+
+#search svg {
+	grid-area: search;
+	overflow: visible;
+	color: hsl(215, 100%, 50%);
+	fill: none;
+	stroke: currentColor;
+}
+
+.spark {
+	fill: currentColor;
+	stroke: none;
+	r: 15;
+}
+
+.spark:nth-child(1) {
+	animation:
+		spark-radius 2.03s 1s both,
+		spark-one-motion 2s 1s both;
+}
+
+@keyframes spark-radius {
+	0% { r: 0; animation-timing-function: cubic-bezier(0, 0.3, 0, 1.57) }
+	30% { r: 15; animation-timing-function: cubic-bezier(1, -0.39, 0.68, 1.04) }
+	95% { r: 8 }
+	99% { r: 10 }
+	99.99% { r: 7 }
+	100% { r: 0 }
+}
+
+@keyframes spark-one-motion {
+	0% { transform: translate(-20%, 50%); animation-timing-function: cubic-bezier(0.63, 0.88, 0, 1.25) }
+	20% { transform: rotate(-0deg) translate(0%, -50%); animation-timing-function: ease-in }
+	80% { transform: rotate(-230deg) translateX(-20%) rotate(-100deg) translateX(15%); animation-timing-function: linear }
+	100% { transform: rotate(-360deg) translate(30px, 100%); animation-timing-function: cubic-bezier(.64,.66,0,.51) }
+}
+
+.spark:nth-child(2) {
+	animation:
+		spark-radius 2.03s 1s both,
+		spark-two-motion 2.03s 1s both;
+}
+
+@keyframes spark-two-motion {
+	0% { transform: translate(120%, 50%) rotate(-70deg) translateY(0%); animation-timing-function: cubic-bezier(0.36, 0.18, 0.94, 0.55) }
+	20% { transform: translate(90%, -80%) rotate(60deg) translateY(-80%); animation-timing-function: cubic-bezier(0.16, 0.77, 1, 0.4) }
+	40% { transform: translate(110%, -50%) rotate(-30deg) translateY(-120%); animation-timing-function: linear }
+	70% { transform: translate(100%, -50%) rotate(120deg) translateY(-100%); animation-timing-function: linear }
+	80% { transform: translate(95%, 50%) rotate(80deg) translateY(-150%); animation-timing-function: cubic-bezier(.64,.66,0,.51) }
+	100% { transform: translate(100%, 50%) rotate(120deg) translateY(0%) }
+}
+
+.spark:nth-child(3) {
+	animation:
+		spark-radius 2.05s 1s both,
+		spark-three-motion 2.03s 1s both;
+}
+
+@keyframes spark-three-motion {
+	0% { transform: translate(50%, 100%) rotate(-40deg) translateX(0%); animation-timing-function: cubic-bezier(0.62, 0.56, 1, 0.54) }
+	30% { transform: translate(40%, 70%) rotate(20deg) translateX(20%); animation-timing-function: cubic-bezier(0, 0.21, 0.88, 0.46) }
+	40% { transform: translate(65%, 20%) rotate(-50deg) translateX(15%); animation-timing-function: cubic-bezier(0, 0.24, 1, 0.62) }
+	60% { transform: translate(60%, -40%) rotate(-50deg) translateX(20%); animation-timing-function: cubic-bezier(0, 0.24, 1, 0.62) }
+	70% { transform: translate(70%, -0%) rotate(-180deg) translateX(20%); animation-timing-function: cubic-bezier(0.15, 0.48, 0.76, 0.26) }
+	100% { transform: translate(70%, -0%) rotate(-360deg) translateX(0%) rotate(180deg) translateX(20%); }
+}
+
+
+
+
+.burst {
+	stroke-width: 3;
+}
+
+.burst :nth-child(2n) { color: #ff783e }
+.burst :nth-child(3n) { color: #ffab00 }
+.burst :nth-child(4n) { color: #55e214 }
+.burst :nth-child(5n) { color: #82d9f5 }
+
+.circle {
+	r: 6;
+}
+
+.rect {
+	width: 10px;
+	height: 10px;
+}
+
+.triangle {
+	d: path("M0,-6 L7,6 L-7,6 Z");
+	stroke-linejoin: round;
+}
+
+.plus {
+	d: path("M0,-5 L0,5 M-5,0L 5,0");
+	stroke-linecap: round;
+}
+
+
+
+
+.burst:nth-child(4) {
+	transform: translate(30px, 100%) rotate(150deg);
+}
+
+.burst:nth-child(5) {
+	transform: translate(50%, 0%) rotate(-20deg);
+}
+
+.burst:nth-child(6) {
+	transform: translate(100%, 50%) rotate(75deg);
+}
+
+.burst * {}
+
+@keyframes particle-fade {
+	0%, 100% { opacity: 0 }
+	5%, 80% { opacity: 1 }
+}
+
+.burst :nth-child(1) { animation: particle-fade 600ms 2.95s both, particle-one-move 600ms 2.95s both; }
+.burst :nth-child(2) { animation: particle-fade 600ms 2.95s both, particle-two-move 600ms 2.95s both; }
+.burst :nth-child(3) { animation: particle-fade 600ms 2.95s both, particle-three-move 600ms 2.95s both; }
+.burst :nth-child(4) { animation: particle-fade 600ms 2.95s both, particle-four-move 600ms 2.95s both; }
+.burst :nth-child(5) { animation: particle-fade 600ms 2.95s both, particle-five-move 600ms 2.95s both; }
+.burst :nth-child(6) { animation: particle-fade 600ms 2.95s both, particle-six-move 600ms 2.95s both; }
+
+@keyframes particle-one-move { 0% { transform: rotate(0deg) translate(-5%) scale(0.0001, 0.0001) } 100% { transform: rotate(-20deg) translateX(8%) scale(0.5, 0.5) } }
+@keyframes particle-two-move { 0% { transform: rotate(0deg) translate(-5%) scale(0.0001, 0.0001) } 100% { transform: rotate(0deg) translateX(8%) scale(0.5, 0.5) } }
+@keyframes particle-three-move { 0% { transform: rotate(0deg) translate(-5%) scale(0.0001, 0.0001) } 100% { transform: rotate(20deg) translateX(8%) scale(0.5, 0.5) } }
+@keyframes particle-four-move { 0% { transform: rotate(0deg) translate(-5%) scale(0.0001, 0.0001) } 100% { transform: rotate(-35deg) translateX(12%) } }
+@keyframes particle-five-move { 0% { transform: rotate(0deg) translate(-5%) scale(0.0001, 0.0001) } 100% { transform: rotate(0deg) translateX(12%) } }
+@keyframes particle-six-move { 0% { transform: rotate(0deg) translate(-5%) scale(0.0001, 0.0001) } 100% { transform: rotate(35deg) translateX(12%) } }
+
+
+
+.bar {
+	width: 100%;
+	height: 100%;
+	ry: 50%;
+	stroke-width: 10;
+	animation: bar-in 900ms 1s both;
+}
+
+@keyframes bar-in {
+	0% { stroke-dasharray: 0 180 0 226 0 405 0 0 }
+	100% { stroke-dasharray: 0 0 181 0 227 0 405 0 }
+}
+
+.magnifier {
+	animation: magnifier-in 600ms 1s both;
+	transform-box: fill-box;
+}
+
+@keyframes magnifier-in {
+	0% { transform: translate(20px, 8px) rotate(-45deg) scale(0.01, 0.01); }
+	50% { transform: translate(-4px, 8px) rotate(-45deg); }
+	100% { transform: translate(0px, 0px) rotate(0deg); }
+}
+
+.magnifier .glass {
+	cx: 27;
+	cy: 27;
+	r: 8;
+	stroke-width: 3;
+}
+.magnifier .handle {
+	x1: 32;
+	y1: 32;
+	x2: 44;
+	y2: 44;
+	stroke-width: 3;
+}
+
+
+
+#results {
+	grid-area: results;
+  color: white;
+	/* background: hsl(0, 0%, 95%);
+   */
+}
+
+/* loader */
+.lp {
+	width: 3em;
+	height: 3em;
+}
+.lp__drops,
+.lp__fall-line,
+.lp__worm {
+	animation-duration: 4s;
+	animation-iteration-count: infinite;
+	transform-origin: 64px 64px;
+}
+.lp__drops {
+	animation-name: drops;
+	animation-timing-function: ease-in-out;
+	stroke-dasharray: 22 307.85 22;
+	visibility: hidden;
+	transform: rotate(90deg);
+}
+.lp__fall-line {
+	animation-name: fallLine1;
+	animation-timing-function: ease-in;
+	stroke-dasharray: 1 112;
+	stroke-dashoffset: 114;
+}
+.lp__fall-line--delay1 {
+	animation-name: fallLine2;
+}
+.lp__fall-line--delay2 {
+	animation-name: fallLine3;
+}
+.lp__fall-line--delay3 {
+	animation-name: fallLine4;
+}
+.lp__fall-line--delay4 {
+	animation-name: fallLine5;
+}
+.lp__ring {
+	stroke: hsla(var(--hue),90%,5%,0.1);
+	transition: stroke 0.3s;
+}
+.lp__worm {
+	animation-name: worm;
+	stroke-dasharray: 43.98 307.87;
+	stroke-dashoffset: -131.94;
+	transform: rotate(-90deg);
+}
+
+/* Dark theme */
+@media (prefers-color-scheme: dark) {
+	:root {
+		--bg: hsl(var(--hue),90%,5%);
+		--fg: hsl(var(--hue),90%,95%);
+	}
+	.lp__ring {
+		stroke: hsla(var(--hue),90%,95%,0.1);
+	}
+}
+
+/* Animtions */
+@keyframes drops {
+	from {
+		animation-timing-function: steps(1,end);
+		stroke-dasharray: 0 351.85 0;
+		visibility: hidden;
+	}
+	25% {
+		animation-timing-function: ease-in-out;
+		stroke-dasharray: 0 351.85 0;
+		visibility: visible;
+	}
+	26% {
+		stroke-dasharray: 4 343.85 4;
+	}
+	27% {
+		stroke-dasharray: 8 335.85 8
+	}
+	28% {
+		stroke-dasharray: 12 327.85 12;
+	}
+	29% {
+		animation-timing-function: ease-in;
+		stroke-dasharray: 17 317.85 17;
+	}
+	32% {
+		animation-timing-function: ease-out;
+		stroke-dasharray: 25 301.85 25;
+	}
+	35%,
+	47.5% {
+		animation-timing-function: linear;
+		stroke-dasharray: 22 307.85 22;
+		visibility: visible;
+	}
+	50% {
+		animation-timing-function: steps(1,end);
+		stroke-dasharray: 0 307.85 43.98;
+		visibility: hidden;
+	}
+	75% {
+		animation-timing-function: ease-in-out;
+		stroke-dasharray: 0 351.85 0;
+		visibility: visible;
+	}
+	76% {
+		stroke-dasharray: 4 343.85 4;
+	}
+	77% {
+		stroke-dasharray: 8 335.85 8
+	}
+	78% {
+		stroke-dasharray: 12 327.85 12;
+	}
+	79% {
+		animation-timing-function: ease-in;
+		stroke-dasharray: 17 317.85 17;
+	}
+	82% {
+		animation-timing-function: ease-out;
+		stroke-dasharray: 25 301.85 25;
+	}
+	85%,
+	97.5% {
+		animation-timing-function: linear;
+		stroke-dasharray: 22 307.85 22;
+		visibility: visible;
+	}
+	to {
+		stroke-dasharray: 43.98 307.85 0;
+		visibility: hidden;
+	}
+}
+@keyframes fallLine1 {
+	from,
+	15% {
+		stroke-dashoffset: 114;
+	}
+	25%,
+	65% {
+		stroke-dashoffset: 1;
+	}
+	75%,
+	to {
+		stroke-dashoffset: -112;
+	}
+}
+@keyframes fallLine2 {
+	from,
+	16% {
+		stroke-dashoffset: 114;
+	}
+	26%,
+	66% {
+		stroke-dashoffset: 1;
+	}
+	76%,
+	to {
+		stroke-dashoffset: -112;
+	}
+}
+@keyframes fallLine3 {
+	from,
+	17% {
+		stroke-dashoffset: 114;
+	}
+	27%,
+	67% {
+		stroke-dashoffset: 1;
+	}
+	77%,
+	to {
+		stroke-dashoffset: -112;
+	}
+}
+@keyframes fallLine4 {
+	from,
+	18% {
+		stroke-dashoffset: 114;
+	}
+	28%,
+	68% {
+		stroke-dashoffset: 1;
+	}
+	78%,
+	to {
+		stroke-dashoffset: -112;
+	}
+}
+@keyframes fallLine5 {
+	from,
+	19% {
+		stroke-dashoffset: 114;
+	}
+	29%,
+	69% {
+		stroke-dashoffset: 1;
+	}
+	79%,
+	to {
+		stroke-dashoffset: -112;
+	}
+}
+@keyframes worm {
+	from {
+		animation-timing-function: ease-out;
+		stroke-dasharray: 87.96 307.87;
+		stroke-dashoffset: -131.94;
+	}
+	25% {
+		animation-timing-function: steps(1);
+		stroke-dasharray: 87.96 307.87;
+		stroke-dashoffset: -307.86;
+	}
+	25.01% {
+		animation-timing-function: ease-in;
+		stroke-dasharray: 43.98 307.87;
+		stroke-dashoffset: -307.86;
+	}
+	50% {
+		animation-timing-function: steps(1);
+		stroke-dasharray: 43.98 307.87;
+		stroke-dashoffset: -175.92;
+	}
+	50.01% {
+		animation-timing-function: ease-out;
+		stroke-dasharray: 87.96 307.87;
+		stroke-dashoffset: -131.94;
+	}
+	75% {
+		animation-timing-function: steps(1);
+		stroke-dasharray: 87.96 307.87;
+		stroke-dashoffset: 43.98;
+	}
+	75.01% {
+		animation-timing-function: ease-in;
+		stroke-dasharray: 43.98 307.87;
+		stroke-dashoffset: 0;
+	}
+	to {
+		stroke-dasharray: 43.98 307.87;
+		stroke-dashoffset: -131.94;
+	}
+}

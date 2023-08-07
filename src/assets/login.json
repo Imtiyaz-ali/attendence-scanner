@@ -1,0 +1,22 @@
+{
+    "teacher": [
+        {
+        "id":"1244",
+        "name":"Manju",
+        "password":"12345678",
+        "admin":false
+    },
+    {
+        "id":"1234",
+        "name":"Keertena",
+        "password":"87654321",
+        "admin":true
+    },
+    {
+        "id":"2345",
+        "name":"Shibu",
+        "password":"password",
+        "admin":true
+    }
+]
+}

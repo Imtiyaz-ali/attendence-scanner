@@ -1,95 +1,93 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, catchError, retry, throwError } from 'rxjs';
+import { TeacherAppService } from '../services/teacher.service';
+import { StudentAppService } from '../services/student.service';
+import { AttendenceService } from '../services/attendence.service';
+
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
   styleUrls: ['./admin.component.css']
 })
-export class AdminComponent implements OnInit{
-  studentStore: undefined;
-  teacherStore: Teachers | undefined;
-  constructor(private http: HttpClient) { }
+export class AdminComponent implements OnInit {
 
+  constructor(private cdRef: ChangeDetectorRef, private TeacherAppService: TeacherAppService, private AttendenceService: AttendenceService, private StudentAppService: StudentAppService, private http: HttpClient, private formBuilder: FormBuilder) { }
   @ViewChild('edits') edit!: ElementRef;
 
+  // stores
+  students: any[] | undefined;
+  teachers: any[] | undefined;
+  currentTeacher: any[] | undefined;
+  attendence_data: any[] | undefined;
 
-// variables
-  tempName="";
-  tempSubject=""
-  tempId=""
-  tempProfile=""
+  // inputs
+  username: string = "";
+  // variables
+  tempName = "dsf";
+  tempSubject = "sadf"
+  tempId = "dsf"
+  tempProfile = "df"
   // 
+  signupForm = new FormGroup({
+    name: new FormControl('', []),
+    id: new FormControl('', []),
+    subject: new FormControl('', [])
+  })
 
-
-   ngOnInit(): void {
+  ngOnInit(): void {
     this.loadStudent()
     this.loadTeacher()
+  
   }
-
-  async loadStudent(){
-    this.http.get<any>('assets/database/student.json').subscribe((data) => {
-      this.studentStore = data;
-      
+  // all student operations
+  async loadStudent() {
+    this.StudentAppService.getAllStudent().subscribe((data) => {
+      this.students = data;
     });
   }
 
-  async loadTeacher(){
-    this.http.get<any>('assets/database/teacher.json').subscribe((data) => {
-      this.teacherStore = data;
 
+  // all teacher operations
+  async loadTeacher() {
+    this.TeacherAppService.getAllTeachers().subscribe((data) => {
+      this.teachers = data;
     });
   }
 
-  editStudentData(){
+  // other same operation
+  async editDatas(id: any, teacher: boolean = true) {
 
+    document.getElementById("edits")?.classList.add('showEdit')
+    if (teacher) {
+      let a = this.TeacherAppService.getTeacherById(id);
+      a.forEach(element => {
+        // this.currentTeacher[] = element
+      });
+      console.log(this.currentTeacher)
+    }
   }
 
-  editTeacherData(id:any){
-    const edit = document.getElementById("edits");
-    edit?.classList.add('showEdit')
-    console.log("DFS")
-    
-  }
+  updateData() {
+    const c = this.signupForm.value.name
+    console.log(c)
 
-  handleError(error:Error){
-    alert(error.message)
-    return throwError(()=>error)
-  }
-  getBlogs():Observable<Teachers[]> {
-    let a = this.http.get<Teachers[]>('assets/database/teacher.json')
-    .pipe(retry(1),catchError(this.handleError))
-    let b = a.forEach(element => {
-      
-      // console.log(element[])1
+    let a = {
+      "id": this.signupForm.value.id,
+      "user_name": this.signupForm.value.name,
+      "subject": this.signupForm.value.subject,
+      "stream": "CS",
+      "img_data": this.tempSubject
+    }
+    console.log(a)
+    this.TeacherAppService.updateTeacher(this.signupForm.value.id!, a).subscribe((response) => {
+      alert("New User Added")
+      document.getElementById("edits")?.classList.remove('showEdit')
+
     });
-    this.http.delete<Teachers>('assets/database/teacher.json'+"1234")
-    .pipe(retry(1),catchError(this.handleError))
-    return a
-
-
-
+    this.cdRef.detectChanges();
   }
+
 }
 
-interface User{
-  user_name: string;
-  roll: number;
-  stream: string;
-  img: string;
-}
-interface Users {
-  [key: string]: User;
-}
-
-
-interface Teacher{
-  user_name: string;
-  subject: string;
-  stream: string;
-  img_data: string;
-}
-interface Teachers {
-  [key: string]: Teacher;
-}
