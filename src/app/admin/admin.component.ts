@@ -22,13 +22,12 @@ export class AdminComponent implements OnInit {
   currentTeacher: any[] | undefined;
   attendence_data: any[] | undefined;
 
-  // inputs
-  username: string = "";
+
   // variables
-  tempName = "dsf";
-  tempSubject = "sadf"
-  tempId = "dsf"
-  tempProfile = "df"
+  tempName = "";
+  tempSubject = ""
+  tempId = ""
+  tempProfile = ""
   // 
   signupForm = new FormGroup({
     name: new FormControl('', []),
@@ -37,6 +36,7 @@ export class AdminComponent implements OnInit {
   })
 
   ngOnInit(): void {
+    // /admin 
     this.loadStudent()
     this.loadTeacher()
   
@@ -82,7 +82,7 @@ export class AdminComponent implements OnInit {
     }
     console.log(a)
     this.TeacherAppService.updateTeacher(this.signupForm.value.id!, a).subscribe((response) => {
-      alert("New User Added")
+      alert("Data Has CHanged")
       document.getElementById("edits")?.classList.remove('showEdit')
 
     });

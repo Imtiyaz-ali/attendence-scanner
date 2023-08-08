@@ -16,17 +16,21 @@ export class TeacherComponent implements OnInit {
   attendence_data: any[] | undefined;
   retreivedData:any[] = [];
 
+
   // load attendence data
+  // loadAttendence(1-->janumary,2-->FusedBatchNorm,3-->)
   async loadAttendence(month: any):Promise<void> {
 
     try {
       //gett the data of specific month
       this.AttendenceService.getAllAttendence(month).subscribe((data) => {
+        // for faster access
         this.attendence_data = data;
       });
 
       // access calender from html
-      const calendarEl = this.el.nativeElement.querySelector('#calendar');
+      let calendarEl = this.el.nativeElement.querySelector('#calendar');
+      //for showing loading
       calendarEl.style.opacity = 0.2;
 
       setTimeout(() => {
@@ -39,9 +43,12 @@ export class TeacherComponent implements OnInit {
     }
 }
 
-// 
+// check if teacher already got that month attendence
 checkData(data:any){
+// if data is in retreived list it will return true else false
   if(this.retreivedData.length>0){
+
+    // if teacher press april ---> 4
     for(let i=0;i<this.retreivedData.length;i++)
         if(this.retreivedData[i]==data)
               return true
@@ -49,20 +56,29 @@ checkData(data:any){
   return false
 }
 
-
+// after just opened the page
   async ngOnInit() {
+
+    // 1 ---> january
     await this.loadAttendence("1")
+
+    // this is access frontend
     $('#calendar').evoCalendar({
       theme: 'Midnight Blue',
     })
     $('#calendar').evoCalendar('toggleSidebar', false);
-    $('#calendar').evoCalendar('selectMonth', 5);
+    $('#calendar').evoCalendar('selectMonth', 1);
+
+    // run when teacher choose another 
     this.onMonthChange()
   }
   // test
   onMonthChange(){
     $('#calendar').on('selectMonth', (event:any, activeMonth:any, monthIndex:any) => {
+
+      // ngZne helps to run a backened function using fronted
       this.ngZone.run(() => {
+
         console.log("Asdf", event, activeMonth, monthIndex + 1);
         if(this.checkData(monthIndex+1)){
           return
@@ -80,15 +96,20 @@ checkData(data:any){
     if(this.checkData(monthId)){
       return
     }
+
     this.retreivedData.push(monthId)
     
+    // frontend
     let monthData = this.attendence_data![monthId];
     const calendarEl = this.el.nativeElement.querySelector('#calendar');
     const calendar = $(calendarEl);
 
+    // loaded attendence data of a specific month
     for (let i in monthData) {
       let day = parseInt(i) + 1;
       let total = 56;
+     
+      
       if (monthData[i] == false) {
         calendar.evoCalendar("addCalendarEvent",
           {
